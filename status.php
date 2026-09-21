@@ -173,9 +173,8 @@ $configtable->data[] = [
     get_string('celebrationwindow', 'local_learningcelebration'),
     $windowlabels[$windowdays] ?? get_string('window_custom', 'local_learningcelebration', $windowdays),
 ];
-$defaultleapdaylabel = $leapdaylabels[
-    \local_learningcelebration\local\birthday\birthday_engine::LEAPDAY_FEBRUARY_28
-];
+$defaultleapdaykey = \local_learningcelebration\local\birthday\birthday_engine::LEAPDAY_FEBRUARY_28;
+$defaultleapdaylabel = $leapdaylabels[$defaultleapdaykey];
 $configtable->data[] = [
     get_string('leapdaypolicy', 'local_learningcelebration'),
     $leapdaylabels[$leapdaypolicy] ?? $defaultleapdaylabel,
