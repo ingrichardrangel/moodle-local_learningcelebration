@@ -53,11 +53,13 @@ final class birthday_context_resolver {
         }
 
         $leapdaypolicy = $config->leapdaypolicy ?? birthday_engine::LEAPDAY_FEBRUARY_28;
-        if (!in_array(
-            $leapdaypolicy,
-            [birthday_engine::LEAPDAY_FEBRUARY_28, birthday_engine::LEAPDAY_MARCH_1],
-            true
-        )) {
+        if (
+            !in_array(
+                $leapdaypolicy,
+                [birthday_engine::LEAPDAY_FEBRUARY_28, birthday_engine::LEAPDAY_MARCH_1],
+                true
+            )
+        ) {
             $leapdaypolicy = birthday_engine::LEAPDAY_FEBRUARY_28;
         }
 
