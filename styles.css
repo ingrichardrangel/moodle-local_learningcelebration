@@ -745,11 +745,6 @@ body.lc-celebration-open {
     gap: .75rem;
 }
 
-.lc-admin-actions .btn,
-.lc-admin-simulator__actions .btn {
-    margin-right: 0 !important;
-}
-
 .lc-admin-panel--actions {
     padding: 1rem 1.2rem;
 }
