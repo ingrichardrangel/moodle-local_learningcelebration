@@ -25,8 +25,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_learningcelebration';
-$plugin->version = 2026092100;
+$plugin->version = 2026092101;
 $plugin->requires = 2024100700; // Moodle 4.5.
-$plugin->supported = [405, 502];
-$plugin->maturity = MATURITY_ALPHA;
-$plugin->release = '0.8.1';
+$plugin->supported = [405, 503];
+$plugin->maturity = MATURITY_BETA;
+$plugin->release = '0.9.0';

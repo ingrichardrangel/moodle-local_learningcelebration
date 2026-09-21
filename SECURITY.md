@@ -24,6 +24,9 @@ The Privacy API covers both annual view records and the optional auto-show opt-o
 
 ## Reporting a vulnerability
 
-Do not publish credentials, personal data, exploit payloads against a live site, or other sensitive details in a public issue. Contact the maintainer privately first and provide the affected version, reproduction steps, expected behaviour and observed behaviour.
+Do not publish credentials, personal data, exploit payloads against a live site or other sensitive vulnerability details in a public issue.
 
-This development package does not yet define a permanent public security-contact address; one should be added before Marketplace release.
+For non-sensitive defects, use the public issue tracker:
+https://github.com/ingrichardrangel/moodle-local_learningcelebration/issues
+
+For a security-sensitive report, contact the maintainer privately through the GitHub repository/profile or use GitHub private vulnerability reporting if it is enabled for the repository. Include the affected version, reproduction steps, expected behaviour and observed behaviour, and allow reasonable time for investigation before public disclosure.

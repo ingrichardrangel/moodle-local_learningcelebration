@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.9.0 - 2026-09-21
+
+### Added
+
+- Moodle 5.3 to the declared support range for beta compatibility validation.
+- Moodle 5.3 / PHP 8.3 / MariaDB and Moodle 5.3 / PHP 8.4 / PostgreSQL jobs to Moodle Plugin CI.
+- Marketplace-facing description, privacy/testing statements, suggested tags, reviewer test path and screenshot checklist in `docs/MARKETPLACE.md`.
+- Public testing documentation in `docs/TESTING.md`.
+- A 1.0 release-candidate acceptance gate in `docs/RELEASE_CHECKLIST.md`.
+- Public repository, issue-tracker and CI links in the README.
+
+### Changed
+
+- Plugin maturity changed from alpha to beta.
+- README refocused from development milestones to installation, behaviour, privacy, security, testing and administrator QA.
+- Security reporting guidance now points users to the public issue tracker for non-sensitive defects and private contact/reporting for vulnerabilities.
+- Feature set frozen for the 1.0 review-candidate phase.
+
+### Notes
+
+- This release adds no learner-facing features and makes no database-schema changes.
+- Moodle 5.3 remains a beta compatibility target until the new CI jobs and manual checks are green.
+
 ## 0.8.1 - 2026-09-21
 
 - CI remediation release with no new learner-facing features.

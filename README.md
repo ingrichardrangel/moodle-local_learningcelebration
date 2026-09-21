@@ -1,136 +1,160 @@
 # Learning Celebration
 
-Learning Celebration is a local Moodle plugin that celebrates a learner's birthday with a personal annual learning recap based on Moodle core learning records.
+[![Moodle Plugin CI](https://github.com/ingrichardrangel/moodle-local_learningcelebration/actions/workflows/ci.yml/badge.svg)](https://github.com/ingrichardrangel/moodle-local_learningcelebration/actions/workflows/ci.yml)
 
-## Version 0.8.1
+Learning Celebration is a free local Moodle plugin that celebrates a learner's birthday with a privacy-conscious annual learning recap built from Moodle core learning records.
 
-Version 0.8.1 is the **CI remediation milestone**. It preserves the validated learner experience while addressing the first full Moodle Plugin CI findings from version 0.8.0.
+## Version 0.9.0 Beta
 
-### Quality infrastructure
+Version 0.9.0 is the **publication-preparation beta**. The learner-facing feature set is frozen while compatibility, documentation, testing evidence and Marketplace materials are prepared for the 1.0 review candidate.
 
-- Added a GitHub Actions workflow powered by Moodle Plugin CI.
-- Added an explicit compatibility matrix for Moodle 4.5 and Moodle 5.2.
-- The matrix exercises both MariaDB and PostgreSQL and uses PHP versions appropriate to each Moodle branch.
-- CI runs PHP lint, Moodle Code Checker, PHPDoc checks, plugin validation, upgrade-savepoint validation, Mustache linting, Grunt/AMD checks, PHPUnit, and Behat.
-- Added Behat smoke scenarios for administrator diagnostics/preview, authenticated learner preferences, and guest authentication enforcement.
-- Expanded PHPUnit regression coverage for annual-view persistence, capability defaults, and Privacy API data discovery/deletion.
-- Normalised PHP licence headers in older files to reduce Marketplace/coding-style review noise.
-- Added `.editorconfig` and `CONTRIBUTING.md` for consistent public contributions.
+There are no new learner-facing features or database-schema changes in this release.
 
-The workflow is committed with the plugin but only runs when the repository is hosted on GitHub and receives a push or pull request. Local ZIP installation does not invoke GitHub Actions and does not send Moodle data anywhere.
+### Compatibility target
 
-## Requirements
+- Moodle 4.5 through Moodle 5.3.
+- PHP version supported by the selected Moodle branch.
+- MariaDB and PostgreSQL are exercised by the public CI matrix.
+- Moodle 5.3 testing uses the `MOODLE_503_STABLE` branch during the pre-release period and must remain green before 5.3 support is treated as release-ready.
 
-- Moodle 4.5 or later (declared support in this development release: 4.5 through 5.2).
-- PHP version supported by the target Moodle release.
-- At least one custom user profile field of type **Date/Time** to use as the date-of-birth field.
+The CI matrix currently targets:
 
-## Installation or upgrade
+- Moodle 4.5 / PHP 8.1 / MariaDB;
+- Moodle 4.5 / PHP 8.3 / PostgreSQL;
+- Moodle 5.2 / PHP 8.3 / MariaDB;
+- Moodle 5.2 / PHP 8.4 / PostgreSQL;
+- Moodle 5.3 / PHP 8.3 / MariaDB;
+- Moodle 5.3 / PHP 8.4 / PostgreSQL.
 
-1. Copy the `learningcelebration` directory to `local/learningcelebration`.
-2. Visit **Site administration > Notifications** and complete the installation/upgrade.
-3. Open **Site administration > Plugins > Local plugins > Learning Celebration**.
-4. Confirm the birthday field, celebration window and 29 February policy.
-5. Configure **Learning recap content** and **Presentation** as required by the institution.
-6. Enable the plugin.
-7. Use **Configuration status** to validate the effective policy and current account.
-8. Use **Celebration preview** to inspect visual variants without creating learner-facing completion state.
+## What the plugin does
 
-Upgrading from 0.8.0 to 0.8.1 renames the existing `local_lc_views` table to `local_learningcelebration_vw` without deleting its records. Fresh installations create the new table name directly.
+When an authenticated learner enters Moodle during the configured birthday window, Learning Celebration can display an accessible full-screen celebration on the first safe page visited. The experience adapts to the amount of meaningful learning history available.
 
-## Capabilities
+Possible experiences include:
 
-### `local/learningcelebration:view`
+- a simple birthday celebration when there is no meaningful learning history yet;
+- Birthday Welcome for newly arrived learners;
+- a completed birthday-to-birthday Learning Year recap;
+- an optional neutral year-over-year comparison when both periods contain enough enabled data.
 
-Controls learner-facing access to automatic celebrations, preferences, replay and the state-changing AJAX service. It is granted by default to the authenticated-user archetype so normal logged-in users keep the 0.6.0 behaviour after upgrade. Administrators can override it through Moodle roles.
+Zero-value metrics are omitted rather than displayed as empty achievements.
 
-### `local/learningcelebration:manage`
-
-Controls **Configuration status**, **Celebration preview**, and the QA reset action. It is granted by default to the manager archetype. Site administrators retain access as usual.
-
-Site-wide configuration remains protected separately by `moodle/site:config`.
-
-## Learning recap content policy
+## Learning records used
 
 Administrators can independently allow or suppress:
 
 - completed courses;
 - completed activities;
-- badges;
-- final course grades;
-- active enrolments used in Birthday Welcome;
+- earned badges;
+- visible numeric final course grades;
+- active enrolments used as welcome context;
 - year-over-year comparison.
 
-The policy is applied before data-richness classification, so disabled metrics cannot influence the experience selection and do not leave empty placeholders.
+The plugin calculates these values on demand from Moodle core records. It does not store analytics snapshots.
+
+## Birthday field
+
+Moodle does not provide a universal core date-of-birth field. The administrator selects an existing custom user profile field of type **Date/Time**.
+
+Learning Celebration reads that field to determine birthday eligibility but does not copy the date of birth into plugin-owned storage.
+
+## Installation
+
+1. Place the `learningcelebration` directory in `local/learningcelebration`.
+2. Visit **Site administration > Notifications** and complete installation.
+3. Create or identify a custom user profile field of type **Date/Time** for date of birth.
+4. Open **Site administration > Plugins > Local plugins > Learning Celebration**.
+5. Select the birthday field and configure the celebration window and 29 February policy.
+6. Configure recap content and optional presentation effects.
+7. Enable the plugin.
+8. Use **Configuration status** and **Celebration preview** to validate the installation before learner use.
+
+Upgrades from 0.8.1 require no schema migration. The migration introduced in 0.8.1 remains available for older installations that still use the former `local_lc_views` table name.
 
 ## Automatic display behaviour
 
-A celebration is considered for automatic display only when all of the following are true:
+A celebration is considered only when all of the following are true:
 
 - the plugin is enabled;
 - the user is authenticated and is not the guest account;
 - the user has `local/learningcelebration:view`;
-- the user has a valid value in the configured Date/Time profile field;
-- the current local date in the user's Moodle timezone is within the configured birthday window;
+- the configured birthday field contains a valid value;
+- the user's local Moodle date is within the configured birthday window;
 - the user has not disabled automatic celebrations;
-- the celebration has not already been completed for the observed birthday year;
-- the current page is considered safe for an interruption.
+- the annual celebration has not already been completed;
+- the current page is considered safe for interruption.
 
-The overlay does not automatically open on administration/authentication/plugin pages, embedded/popup/secure layouts, submitted-form requests, or active quiz-attempt flows.
+Automatic display is excluded from administration and authentication pages, plugin pages, embedded/pop-up/secure layouts, submitted-form requests and active quiz-attempt flows.
 
-## State-changing actions
+## Learner controls
 
-The learner's **Remind me later** and **Continue to Moodle** actions are sent through Moodle's standard `core/ajax` module to the registered external function `local_learningcelebration_update_celebration_state`.
+Learners can:
 
-The service validates:
+- choose **Remind me later** without completing the annual celebration;
+- complete the celebration and continue to Moodle;
+- disable automatic celebrations in their preferences;
+- replay their most recently completed Learning Celebration.
 
-1. external-function parameter types;
-2. the current Moodle user context;
-3. `local/learningcelebration:view`;
-4. the configured birthday field and current birthday-window eligibility;
-5. that the supplied celebration year matches the server-derived year;
-6. that the annual view record already exists because the overlay was actually rendered.
+Replay is read-only and does not increase the automatic-display count.
 
-This prevents a logged-in browser from fabricating arbitrary annual completion records by altering client parameters.
+## Capabilities
 
-## Learning periods and analytics
+### `local/learningcelebration:view`
 
-The most recently completed learning year is defined as:
+Controls learner-facing automatic celebrations, preferences, replay and celebration-state actions. It is granted by default to authenticated users.
 
-`previous observed birthday <= activity < most recent observed birthday`
+### `local/learningcelebration:manage`
 
-Learning Celebration reads Moodle core records for course completions, activity completions, badge awards, visible numeric final course grades and active enrolments. Analytics are calculated on demand and are not persisted as snapshots.
+Controls Configuration status, Celebration preview and the QA reset tool. It is granted by default to the manager archetype.
 
-Moodle stores one current activity-completion row per user/activity, so later completion-state changes can alter historical attribution. Likewise, course completion determines the recap period while the grade shown is the current visible final course grade.
+Site-wide settings remain protected by `moodle/site:config`.
 
 ## Privacy
 
-The date of birth remains in Moodle's custom profile-field storage and is not copied into plugin-owned storage.
-
-`local_learningcelebration_vw` stores only:
+The plugin stores only the minimum state needed to avoid repeatedly showing the same annual celebration:
 
 - user id;
 - observed birthday year;
 - first and most recent automatic-display timestamps;
 - automatic-display count;
-- completion status;
+- completion state;
 - completion timestamp.
 
-An optional user preference is stored only when a learner disables automatic celebrations. The Privacy API declares, exports and deletes both kinds of plugin-owned data. Version 0.7.0 also correctly discovers and removes preference-only records even when that user has never generated an annual view row.
+An optional user preference is stored only when a learner disables automatic celebrations. Date of birth, grades, courses, badges and calculated recap statistics are not duplicated into plugin-owned storage.
 
-See `PRIVACY.md` for the data-minimisation model and `SECURITY.md` for the security model.
+The Moodle Privacy API declares, exports and deletes both annual-view records and the optional preference. No learner data is transmitted to external services.
 
-## Testing 0.8.1
+See [PRIVACY.md](PRIVACY.md) for the complete data-minimisation model.
 
-The learner-facing runtime remains functionally unchanged, so the established manual regression sequence should still pass: automatic display, snooze, completion persistence, replay, QA reset, page exclusions, capability restrictions, and privacy behaviour.
+## Security
 
-For repository validation, push the plugin source to GitHub and inspect the **Moodle Plugin CI** workflow. All matrix jobs should pass before treating a commit as release-ready. The workflow covers Moodle 4.5/5.2, MariaDB/PostgreSQL, PHPUnit, Behat, Moodle coding checks, Mustache, and AMD/Grunt validation.
+State-changing learner actions use Moodle External Services and `core/ajax`. Parameters, login state, capabilities and the server-derived eligible celebration year are validated before a change is accepted. Administrative reset actions require POST and a valid Moodle sesskey.
 
-The Behat suite currently provides smoke coverage rather than a complete browser-level simulation of every birthday scenario. Calendar and analytics edge cases continue to be covered primarily by PHPUnit and the administrator simulation tools.
+See [SECURITY.md](SECURITY.md) for the complete security model.
 
-## Roadmap
+## Automated tests
 
-The next milestone is 0.9.0 beta after the 0.8.1 CI matrix is fully green: perform explicit Moodle 4.5/5.2 compatibility passes, add Moodle 5.3 validation, prepare Marketplace-facing documentation and freeze the feature set for the 1.0 review candidate.
+The repository contains PHPUnit and Behat tests and a Moodle Plugin CI workflow. The pipeline runs PHP lint, Moodle Code Checker, PHPDoc checks, plugin validation, upgrade-savepoint validation, Mustache linting, Grunt/AMD validation, PHPUnit and Behat.
+
+Version 0.8.1 established a fully green CI baseline for Moodle 4.5 and 5.2 on MariaDB and PostgreSQL. Version 0.9.0 extends that same matrix to Moodle 5.3.
+
+See [docs/TESTING.md](docs/TESTING.md) and [docs/RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md).
+
+## Administrator QA tools
+
+**Configuration status** exposes read-only diagnostics for the configured birthday field, date engine, current learning periods, enabled content policy and automatic-display state.
+
+The built-in birthday simulator lets an administrator test arbitrary dates, including leap-day and year-boundary cases, without changing the server clock or user profile.
+
+**Celebration preview** provides deterministic demonstration data for every presentation mode without writing learner completion state.
+
+## Public project links
+
+- Source code: https://github.com/ingrichardrangel/moodle-local_learningcelebration
+- Issue tracker: https://github.com/ingrichardrangel/moodle-local_learningcelebration/issues
+- CI: https://github.com/ingrichardrangel/moodle-local_learningcelebration/actions/workflows/ci.yml
+
+Marketplace-facing copy and screenshot guidance are maintained in [docs/MARKETPLACE.md](docs/MARKETPLACE.md).
 
 ## License
 
