@@ -22,8 +22,6 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Upgrade Learning Celebration.
  *
@@ -59,7 +57,6 @@ function xmldb_local_learningcelebration_upgrade(int $oldversion): bool {
         upgrade_plugin_savepoint(true, 2026091807, 'local', 'learningcelebration');
     }
 
-
     if ($oldversion < 2026091809) {
         $table = new xmldb_table('local_lc_views');
         $oldindex = new xmldb_index('completedidx', XMLDB_INDEX_NOTUNIQUE, ['completed']);
@@ -77,6 +74,17 @@ function xmldb_local_learningcelebration_upgrade(int $oldversion): bool {
         }
 
         upgrade_plugin_savepoint(true, 2026091809, 'local', 'learningcelebration');
+    }
+
+    if ($oldversion < 2026092100) {
+        $oldtable = new xmldb_table('local_lc_views');
+        $newtable = new xmldb_table('local_learningcelebration_vw');
+
+        if ($dbman->table_exists($oldtable) && !$dbman->table_exists($newtable)) {
+            $dbman->rename_table($oldtable, 'local_learningcelebration_vw');
+        }
+
+        upgrade_plugin_savepoint(true, 2026092100, 'local', 'learningcelebration');
     }
 
     return true;

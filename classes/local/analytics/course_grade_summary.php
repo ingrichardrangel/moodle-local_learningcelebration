@@ -62,27 +62,47 @@ final class course_grade_summary {
         $this->bestcoursename = $bestcoursename;
     }
 
-    /** @return int Number of usable course grades. */
+    /**
+     * Get the number of usable course grades.
+     *
+     * @return int Number of usable course grades.
+     */
     public function get_count(): int {
         return $this->count;
     }
 
-    /** @return float|null Average percentage. */
+    /**
+     * Get the average normalised course grade.
+     *
+     * @return float|null Average percentage.
+     */
     public function get_average(): ?float {
         return $this->average;
     }
 
-    /** @return float|null Best percentage. */
+    /**
+     * Get the best normalised course grade.
+     *
+     * @return float|null Best percentage.
+     */
     public function get_best(): ?float {
         return $this->best;
     }
 
-    /** @return int|null Best course id. */
+    /**
+     * Get the best course id.
+     *
+     * @return int|null Best course id.
+     */
     public function get_best_course_id(): ?int {
         return $this->bestcourseid;
     }
 
-    /** @return string|null Best course name. */
+    /**
+     * Get the best course name.
+     *
+     * @return string|null Best course name.
+     */
     public function get_best_course_name(): ?string {
         return $this->bestcoursename;
     }

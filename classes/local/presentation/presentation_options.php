@@ -40,7 +40,11 @@ final class presentation_options {
         $this->confetti = $confetti;
     }
 
-    /** @return self */
+    /**
+     * Build presentation options from plugin configuration.
+     *
+     * @return self
+     */
     public static function from_config(): self {
         $config = get_config('local_learningcelebration');
         return new self(
@@ -49,7 +53,11 @@ final class presentation_options {
         );
     }
 
-    /** @return bool */
+    /**
+     * Check whether plugin-authored motion is enabled.
+     *
+     * @return bool
+     */
     public function motion_enabled(): bool {
         return $this->motion;
     }

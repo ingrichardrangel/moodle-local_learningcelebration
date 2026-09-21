@@ -53,7 +53,11 @@ final class birthday_context_resolver {
         }
 
         $leapdaypolicy = $config->leapdaypolicy ?? birthday_engine::LEAPDAY_FEBRUARY_28;
-        if (!in_array($leapdaypolicy, [birthday_engine::LEAPDAY_FEBRUARY_28, birthday_engine::LEAPDAY_MARCH_1], true)) {
+        if (!in_array(
+            $leapdaypolicy,
+            [birthday_engine::LEAPDAY_FEBRUARY_28, birthday_engine::LEAPDAY_MARCH_1],
+            true
+        )) {
             $leapdaypolicy = birthday_engine::LEAPDAY_FEBRUARY_28;
         }
 
@@ -67,9 +71,11 @@ final class birthday_context_resolver {
 
         $birthtimestamp = null;
         $usecache = !is_siteadmin($user);
-        if ($usecache
-                && isset($SESSION->local_learningcelebration_birthcache)
-                && ($SESSION->local_learningcelebration_birthcache['signature'] ?? '') === $signature) {
+        if (
+            $usecache
+            && isset($SESSION->local_learningcelebration_birthcache)
+            && ($SESSION->local_learningcelebration_birthcache['signature'] ?? '') === $signature
+        ) {
             $cached = $SESSION->local_learningcelebration_birthcache['birthtimestamp'] ?? null;
             $birthtimestamp = is_int($cached) ? $cached : null;
         } else {

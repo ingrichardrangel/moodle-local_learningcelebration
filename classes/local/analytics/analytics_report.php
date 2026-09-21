@@ -74,42 +74,74 @@ final class analytics_report {
         $this->experience = $experience;
     }
 
-    /** @return period_statistics Current completed period. */
+    /**
+     * Get statistics for the current completed learning period.
+     *
+     * @return period_statistics Current completed period.
+     */
     public function get_current_period(): period_statistics {
         return $this->currentperiod;
     }
 
-    /** @return period_statistics Previous completed period. */
+    /**
+     * Get statistics for the previous completed learning period.
+     *
+     * @return period_statistics Previous completed period.
+     */
     public function get_previous_period(): period_statistics {
         return $this->previousperiod;
     }
 
-    /** @return int Current active enrolments. */
+    /**
+     * Get the current active enrolment count.
+     *
+     * @return int Current active enrolments.
+     */
     public function get_active_enrolments(): int {
         return $this->activeenrolments;
     }
 
-    /** @return int Account age in calendar days. */
+    /**
+     * Get the account age in calendar days.
+     *
+     * @return int Account age in calendar days.
+     */
     public function get_account_age_days(): int {
         return $this->accountagedays;
     }
 
-    /** @return string Current richness. */
+    /**
+     * Get the current-period data richness.
+     *
+     * @return string Current richness.
+     */
     public function get_current_richness(): string {
         return $this->currentrichness;
     }
 
-    /** @return string Previous richness. */
+    /**
+     * Get the previous-period data richness.
+     *
+     * @return string Previous richness.
+     */
     public function get_previous_richness(): string {
         return $this->previousrichness;
     }
 
-    /** @return string Suggested experience mode. */
+    /**
+     * Get the suggested celebration experience.
+     *
+     * @return string Suggested experience mode.
+     */
     public function get_experience(): string {
         return $this->experience;
     }
 
-    /** @return bool Whether a year-over-year comparison is sufficiently supported. */
+    /**
+     * Check whether year-over-year comparison is available.
+     *
+     * @return bool Whether a year-over-year comparison is sufficiently supported.
+     */
     public function is_comparison_available(): bool {
         return $this->experience === data_richness_classifier::EXPERIENCE_LEARNING_YEAR_COMPARISON;
     }

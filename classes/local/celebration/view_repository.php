@@ -25,7 +25,7 @@ namespace local_learningcelebration\local\celebration;
  */
 final class view_repository {
     /** Database table name. */
-    public const TABLE = 'local_lc_views';
+    public const TABLE = 'local_learningcelebration_vw';
 
     /**
      * Return one annual view record.

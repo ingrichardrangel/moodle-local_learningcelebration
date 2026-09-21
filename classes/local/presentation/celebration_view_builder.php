@@ -187,7 +187,13 @@ final class celebration_view_builder {
         return $this->wrap_context($slides, $firstname, $sitename, $experience, true);
     }
 
-    /** @return array Hero slide. */
+    /**
+     * Build the birthday hero slide.
+     *
+     * @param string $firstname Learner first name.
+     * @param string $experience Selected experience mode.
+     * @return array Hero slide.
+     */
     private function hero_slide(string $firstname, string $experience): array {
         if ($experience === data_richness_classifier::EXPERIENCE_BIRTHDAY_WELCOME) {
             $body = get_string('visual_hero_body_welcome', 'local_learningcelebration');
@@ -206,7 +212,11 @@ final class celebration_view_builder {
         ];
     }
 
-    /** @return array Quiet-year slide. */
+    /**
+     * Build the quiet-year slide.
+     *
+     * @return array Quiet-year slide.
+     */
     private function quiet_year_slide(): array {
         return [
             'kind' => 'quiet',
@@ -216,7 +226,13 @@ final class celebration_view_builder {
         ];
     }
 
-    /** @return array Welcome slide using only meaningful non-zero information. */
+    /**
+     * Build the low-data welcome slide.
+     *
+     * @param analytics_report $report Analytics report.
+     * @param period_statistics $statistics Period statistics.
+     * @return array Welcome slide using only meaningful non-zero information.
+     */
     private function welcome_slide(analytics_report $report, period_statistics $statistics): array {
         $metrics = [];
         if ($report->get_active_enrolments() > 0) {
@@ -248,7 +264,13 @@ final class celebration_view_builder {
         ];
     }
 
-    /** @return array Learning period slide. */
+    /**
+     * Build the birthday-to-birthday period slide.
+     *
+     * @param evaluation $evaluation Birthday evaluation.
+     * @param string $timezoneid User timezone identifier.
+     * @return array Learning period slide.
+     */
     private function period_slide(evaluation $evaluation, string $timezoneid): array {
         $dateformat = get_string('strftimedate', 'core_langconfig');
         return [
@@ -262,7 +284,12 @@ final class celebration_view_builder {
         ];
     }
 
-    /** @return array Metrics slide with zero-value metrics omitted. */
+    /**
+     * Build the annual metrics slide.
+     *
+     * @param period_statistics $statistics Period statistics.
+     * @return array Metrics slide with zero-value metrics omitted.
+     */
     private function metrics_slide(period_statistics $statistics): array {
         $metrics = [];
         if ($statistics->get_completed_courses() > 0) {
@@ -299,7 +326,12 @@ final class celebration_view_builder {
         ];
     }
 
-    /** @return array Best-course highlight. */
+    /**
+     * Build the best-course highlight slide.
+     *
+     * @param period_statistics $statistics Period statistics.
+     * @return array Best-course highlight.
+     */
     private function highlight_slide(period_statistics $statistics): array {
         return [
             'kind' => 'highlight',
@@ -311,7 +343,13 @@ final class celebration_view_builder {
         ];
     }
 
-    /** @return array Comparison slide using direct counts, without judgemental winner language. */
+    /**
+     * Build the neutral year-over-year comparison slide.
+     *
+     * @param period_statistics $current Current period statistics.
+     * @param period_statistics $previous Previous period statistics.
+     * @return array Comparison slide using direct counts, without judgemental winner language.
+     */
     private function comparison_slide(period_statistics $current, period_statistics $previous): array {
         $comparisons = [];
         if ($current->get_completed_courses() > 0 || $previous->get_completed_courses() > 0) {
@@ -357,7 +395,11 @@ final class celebration_view_builder {
         ];
     }
 
-    /** @return array Final slide. */
+    /**
+     * Build the closing slide.
+     *
+     * @return array Final slide.
+     */
     private function final_slide(): array {
         return [
             'kind' => 'final',
@@ -368,12 +410,25 @@ final class celebration_view_builder {
         ];
     }
 
-    /** @return array Metric item. */
+    /**
+     * Build one metric presentation item.
+     *
+     * @param string $value Metric value.
+     * @param string $label Display label.
+     * @return array Metric item.
+     */
     private function metric(string $value, string $label): array {
         return ['value' => $value, 'label' => $label];
     }
 
-    /** @return array Comparison item. */
+    /**
+     * Build one comparison presentation item.
+     *
+     * @param string $label Display label.
+     * @param string $current Current-period value.
+     * @param string $previous Previous-period value.
+     * @return array Comparison item.
+     */
     private function comparison(string $label, string $current, string $previous): array {
         return ['label' => $label, 'current' => $current, 'previous' => $previous];
     }

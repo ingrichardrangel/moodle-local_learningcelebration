@@ -28,7 +28,9 @@ use local_learningcelebration\local\presentation\celebration_view_builder;
  * @covers    \local_learningcelebration\local\presentation\celebration_view_builder
  */
 final class celebration_view_builder_test extends \advanced_testcase {
-    /** All deterministic preview modes produce an interactive deck with at least two slides. */
+    /**
+     * All deterministic preview modes produce an interactive deck with at least two slides.
+     */
     public function test_all_demo_modes_build_complete_decks(): void {
         $builder = new celebration_view_builder();
         $modes = [
@@ -49,7 +51,9 @@ final class celebration_view_builder_test extends \advanced_testcase {
         }
     }
 
-    /** Comparison demo contains a dedicated comparison slide. */
+    /**
+     * Comparison demo contains a dedicated comparison slide.
+     */
     public function test_comparison_demo_contains_comparison_slide(): void {
         $context = (new celebration_view_builder())->build_demo(
             data_richness_classifier::EXPERIENCE_LEARNING_YEAR_COMPARISON,
@@ -61,7 +65,9 @@ final class celebration_view_builder_test extends \advanced_testcase {
         $this->assertCount(1, $comparisons);
     }
 
-    /** Unsupported preview modes are rejected rather than silently normalised. */
+    /**
+     * Unsupported preview modes are rejected rather than silently normalised.
+     */
     public function test_unsupported_demo_mode_is_rejected(): void {
         $this->expectException(\InvalidArgumentException::class);
         (new celebration_view_builder())->build_demo('unknown_mode', 'Alex', 'Example Moodle');

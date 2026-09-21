@@ -146,7 +146,6 @@ if ($hassiteconfig) {
         get_string('enableconfetti_desc', 'local_learningcelebration'),
         1
     ));
-
 }
 
 $ADMIN->add('localplugins', new admin_externalpage(

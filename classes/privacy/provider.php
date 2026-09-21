@@ -34,11 +34,10 @@ use local_learningcelebration\local\celebration\view_repository;
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 final class provider implements
-        \core_privacy\local\metadata\provider,
-        \core_privacy\local\request\plugin\provider,
-        \core_privacy\local\request\core_userlist_provider,
-        \core_privacy\local\request\user_preference_provider {
-
+    \core_privacy\local\metadata\provider,
+    \core_privacy\local\request\core_userlist_provider,
+    \core_privacy\local\request\plugin\provider,
+    \core_privacy\local\request\user_preference_provider {
     /** @var string Component name. */
     private const COMPONENT = 'local_learningcelebration';
 
@@ -99,7 +98,8 @@ final class provider implements
         global $DB;
 
         $systemcontext = \context_system::instance();
-        if (!in_array($systemcontext->id, $contextlist->get_contextids(), true)) {
+        $contextids = array_map('intval', $contextlist->get_contextids());
+        if (!in_array((int) $systemcontext->id, $contextids, true)) {
             return;
         }
 
@@ -155,7 +155,8 @@ final class provider implements
         global $DB;
 
         $systemcontext = \context_system::instance();
-        if (!in_array($systemcontext->id, $contextlist->get_contextids(), true)) {
+        $contextids = array_map('intval', $contextlist->get_contextids());
+        if (!in_array((int) $systemcontext->id, $contextids, true)) {
             return;
         }
 

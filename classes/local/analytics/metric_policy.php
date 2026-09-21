@@ -84,32 +84,56 @@ final class metric_policy {
         );
     }
 
-    /** @return bool */
+    /**
+     * Check whether completed courses are enabled.
+     *
+     * @return bool
+     */
     public function includes_completed_courses(): bool {
         return $this->completedcourses;
     }
 
-    /** @return bool */
+    /**
+     * Check whether completed activities are enabled.
+     *
+     * @return bool
+     */
     public function includes_completed_activities(): bool {
         return $this->completedactivities;
     }
 
-    /** @return bool */
+    /**
+     * Check whether badges are enabled.
+     *
+     * @return bool
+     */
     public function includes_badges(): bool {
         return $this->badges;
     }
 
-    /** @return bool */
+    /**
+     * Check whether course grades are enabled.
+     *
+     * @return bool
+     */
     public function includes_grades(): bool {
         return $this->grades;
     }
 
-    /** @return bool */
+    /**
+     * Check whether active enrolments are enabled.
+     *
+     * @return bool
+     */
     public function includes_active_enrolments(): bool {
         return $this->activeenrolments;
     }
 
-    /** @return bool */
+    /**
+     * Check whether year-over-year comparison is enabled.
+     *
+     * @return bool
+     */
     public function allows_comparison(): bool {
         return $this->comparison;
     }

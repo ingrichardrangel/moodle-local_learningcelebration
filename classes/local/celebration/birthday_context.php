@@ -48,17 +48,29 @@ final class birthday_context {
         $this->celebrationyear = $celebrationyear;
     }
 
-    /** @return evaluation */
+    /**
+     * Get the birthday-engine evaluation.
+     *
+     * @return evaluation
+     */
     public function get_evaluation(): evaluation {
         return $this->evaluation;
     }
 
-    /** @return \DateTimeZone */
+    /**
+     * Get the user timezone used for the evaluation.
+     *
+     * @return \DateTimeZone
+     */
     public function get_timezone(): \DateTimeZone {
         return $this->timezone;
     }
 
-    /** @return int */
+    /**
+     * Get the observed birthday year.
+     *
+     * @return int
+     */
     public function get_celebration_year(): int {
         return $this->celebrationyear;
     }

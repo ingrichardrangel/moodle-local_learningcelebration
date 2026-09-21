@@ -49,23 +49,43 @@ final class page_policy {
     ];
 
     /**
-     * Check the current page.
+     * Check whether automatic display is safe for the current request and page.
      *
      * @param \moodle_page $page Moodle page.
-     * @return bool
+     * @return bool Whether the celebration may be displayed.
      */
     public function is_safe(\moodle_page $page): bool {
-        if ((defined('CLI_SCRIPT') && CLI_SCRIPT)
-                || (defined('AJAX_SCRIPT') && AJAX_SCRIPT)
-                || (defined('WS_SERVER') && WS_SERVER)) {
+        return $this->is_request_environment_safe() && $this->is_page_safe($page);
+    }
+
+    /**
+     * Check whether the current request environment allows an interruption.
+     *
+     * @return bool Whether the request environment is safe.
+     */
+    public function is_request_environment_safe(): bool {
+        if (
+            (defined('CLI_SCRIPT') && CLI_SCRIPT)
+            || (defined('AJAX_SCRIPT') && AJAX_SCRIPT)
+            || (defined('WS_SERVER') && WS_SERVER)
+        ) {
             return false;
         }
 
         // Never interrupt a page while submitted form data is being processed.
-        if (data_submitted()) {
-            return false;
-        }
+        return !data_submitted();
+    }
 
+    /**
+     * Check whether a Moodle page itself is safe for an automatic celebration.
+     *
+     * This method deliberately excludes request-environment checks so page rules
+     * can be tested independently under PHPUnit, where CLI_SCRIPT is enabled.
+     *
+     * @param \moodle_page $page Moodle page.
+     * @return bool Whether the page is safe.
+     */
+    public function is_page_safe(\moodle_page $page): bool {
         if (in_array((string) $page->pagelayout, self::EXCLUDED_LAYOUTS, true)) {
             return false;
         }

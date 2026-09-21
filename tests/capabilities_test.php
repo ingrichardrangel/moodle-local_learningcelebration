@@ -22,6 +22,7 @@ namespace local_learningcelebration;
  * @package   local_learningcelebration
  * @copyright 2026 Richard Rangel
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @coversNothing
  */
 final class capabilities_test extends \advanced_testcase {
     /**

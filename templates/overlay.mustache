@@ -1,7 +1,36 @@
 {{!
-    Automatic Learning Celebration overlay.
-
     @template local_learningcelebration/overlay
+
+    Automatic modal overlay containing the Learning Celebration slide deck.
+
+    Example context (json):
+    {
+        "rootid": "local-learningcelebration-example",
+        "motionenabled": true,
+        "dialoglabel": "Your annual Learning Celebration",
+        "notnowlabel": "Remind me later",
+        "actionerror": "Moodle could not save this choice.",
+        "slidecount": 1,
+        "brandlabel": "Learning Celebration",
+        "previouslabel": "Previous",
+        "nextlabel": "Next",
+        "restartlabel": "Replay",
+        "finishlabel": "Continue to Moodle",
+        "isoverlay": true,
+        "slides": [
+            {
+                "kind": "hero",
+                "index": 0,
+                "isfirst": true,
+                "ishero": true,
+                "confettienabled": true,
+                "eyebrow": "Happy birthday",
+                "title": "Happy birthday, Alex!",
+                "body": "Another year of learning begins today.",
+                "slidelabel": "Go to slide 1"
+            }
+        ]
+    }
 }}
 <div id="{{rootid}}"
      class="lc-auto-overlay{{^motionenabled}} lc-motion-disabled{{/motionenabled}}"

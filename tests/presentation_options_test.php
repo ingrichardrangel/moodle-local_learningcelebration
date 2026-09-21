@@ -29,7 +29,9 @@ use local_learningcelebration\local\presentation\presentation_options;
  * @covers    \local_learningcelebration\local\presentation\presentation_options
  */
 final class presentation_options_test extends \advanced_testcase {
-    /** Disabling motion also suppresses animated confetti. */
+    /**
+     * Disabling motion also suppresses animated confetti.
+     */
     public function test_motion_off_suppresses_confetti(): void {
         $options = new presentation_options(false, true);
         $this->assertFalse($options->motion_enabled());

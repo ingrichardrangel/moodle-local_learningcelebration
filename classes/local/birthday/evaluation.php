@@ -104,27 +104,47 @@ final class evaluation {
         $this->state = $state;
     }
 
-    /** @return \DateTimeImmutable Local birth date. */
+    /**
+     * Get the local date of birth.
+     *
+     * @return \DateTimeImmutable Local birth date.
+     */
     public function get_date_of_birth(): \DateTimeImmutable {
         return $this->dateofbirth;
     }
 
-    /** @return \DateTimeImmutable Current local date. */
+    /**
+     * Get the evaluated current local date.
+     *
+     * @return \DateTimeImmutable Current local date.
+     */
     public function get_today(): \DateTimeImmutable {
         return $this->today;
     }
 
-    /** @return \DateTimeImmutable Most recent observed birthday. */
+    /**
+     * Get the most recent observed birthday.
+     *
+     * @return \DateTimeImmutable Most recent observed birthday.
+     */
     public function get_last_birthday(): \DateTimeImmutable {
         return $this->lastbirthday;
     }
 
-    /** @return \DateTimeImmutable Next observed birthday. */
+    /**
+     * Get the next observed birthday.
+     *
+     * @return \DateTimeImmutable Next observed birthday.
+     */
     public function get_next_birthday(): \DateTimeImmutable {
         return $this->nextbirthday;
     }
 
-    /** @return \DateTimeImmutable Start of the completed learning period. */
+    /**
+     * Get the start of the completed learning period.
+     *
+     * @return \DateTimeImmutable Start of the completed learning period.
+     */
     public function get_period_start(): \DateTimeImmutable {
         return $this->periodstart;
     }
@@ -141,47 +161,83 @@ final class evaluation {
         return $this->periodendexclusive;
     }
 
-    /** @return \DateTimeImmutable Inclusive display end of the completed learning period. */
+    /**
+     * Get the inclusive display end of the completed learning period.
+     *
+     * @return \DateTimeImmutable Inclusive display end of the completed learning period.
+     */
     public function get_period_end_display(): \DateTimeImmutable {
         return $this->periodendexclusive->modify('-1 day');
     }
 
-    /** @return \DateTimeImmutable Start of the preceding completed learning period. */
+    /**
+     * Get the start of the preceding completed learning period.
+     *
+     * @return \DateTimeImmutable Start of the preceding completed learning period.
+     */
     public function get_previous_period_start(): \DateTimeImmutable {
         return $this->previousperiodstart;
     }
 
-    /** @return \DateTimeImmutable Exclusive end of the preceding completed learning period. */
+    /**
+     * Get the exclusive end of the preceding completed learning period.
+     *
+     * @return \DateTimeImmutable Exclusive end of the preceding completed learning period.
+     */
     public function get_previous_period_end_exclusive(): \DateTimeImmutable {
         return $this->previousperiodendexclusive;
     }
 
-    /** @return \DateTimeImmutable Inclusive display end of the preceding completed learning period. */
+    /**
+     * Get the inclusive display end of the preceding completed learning period.
+     *
+     * @return \DateTimeImmutable Inclusive display end of the preceding completed learning period.
+     */
     public function get_previous_period_end_display(): \DateTimeImmutable {
         return $this->previousperiodendexclusive->modify('-1 day');
     }
 
-    /** @return bool Whether the configured celebration window is active. */
+    /**
+     * Check whether the configured celebration window is active.
+     *
+     * @return bool Whether the configured celebration window is active.
+     */
     public function is_eligible(): bool {
         return $this->eligible;
     }
 
-    /** @return bool Whether today is the observed birthday itself. */
+    /**
+     * Check whether today is the observed birthday.
+     *
+     * @return bool Whether today is the observed birthday itself.
+     */
     public function is_birthday_today(): bool {
         return $this->birthdaytoday;
     }
 
-    /** @return int Calendar days since the most recent observed birthday. */
+    /**
+     * Get the number of calendar days since the observed birthday.
+     *
+     * @return int Calendar days since the most recent observed birthday.
+     */
     public function get_days_after_birthday(): int {
         return $this->daysafterbirthday;
     }
 
-    /** @return int Calendar days until the next observed birthday. */
+    /**
+     * Get the number of calendar days until the next observed birthday.
+     *
+     * @return int Calendar days until the next observed birthday.
+     */
     public function get_days_until_next_birthday(): int {
         return (int) $this->today->diff($this->nextbirthday)->days;
     }
 
-    /** @return string Evaluation state. */
+    /**
+     * Get the calculated celebration state.
+     *
+     * @return string Evaluation state.
+     */
     public function get_state(): string {
         return $this->state;
     }

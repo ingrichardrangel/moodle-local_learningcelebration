@@ -86,42 +86,74 @@ final class period_statistics {
         $this->bestcoursename = $bestcoursename;
     }
 
-    /** @return int Courses completed. */
+    /**
+     * Get the number of completed courses.
+     *
+     * @return int Courses completed.
+     */
     public function get_completed_courses(): int {
         return $this->completedcourses;
     }
 
-    /** @return int Activities completed. */
+    /**
+     * Get the number of completed activities.
+     *
+     * @return int Activities completed.
+     */
     public function get_completed_activities(): int {
         return $this->completedactivities;
     }
 
-    /** @return int Badges earned. */
+    /**
+     * Get the number of earned badges.
+     *
+     * @return int Badges earned.
+     */
     public function get_earned_badges(): int {
         return $this->earnedbadges;
     }
 
-    /** @return int Completed courses with a visible numeric grade. */
+    /**
+     * Get the number of completed courses with a usable grade.
+     *
+     * @return int Completed courses with a visible numeric grade.
+     */
     public function get_graded_completed_courses(): int {
         return $this->gradedcompletedcourses;
     }
 
-    /** @return float|null Average normalised course grade percentage. */
+    /**
+     * Get the average normalised course grade.
+     *
+     * @return float|null Average normalised course grade percentage.
+     */
     public function get_average_course_grade(): ?float {
         return $this->averagecoursegrade;
     }
 
-    /** @return float|null Best normalised course grade percentage. */
+    /**
+     * Get the best normalised course grade.
+     *
+     * @return float|null Best normalised course grade percentage.
+     */
     public function get_best_course_grade(): ?float {
         return $this->bestcoursegrade;
     }
 
-    /** @return int|null Best course id. */
+    /**
+     * Get the best course id.
+     *
+     * @return int|null Best course id.
+     */
     public function get_best_course_id(): ?int {
         return $this->bestcourseid;
     }
 
-    /** @return string|null Best course name. */
+    /**
+     * Get the best course name.
+     *
+     * @return string|null Best course name.
+     */
     public function get_best_course_name(): ?string {
         return $this->bestcoursename;
     }

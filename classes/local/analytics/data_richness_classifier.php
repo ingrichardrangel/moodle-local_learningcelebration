@@ -26,14 +26,28 @@ namespace local_learningcelebration\local\analytics;
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 final class data_richness_classifier {
+    /** No meaningful annual learning signals are available. */
     public const NONE = 'none';
+
+    /** A small amount of learning data is available. */
     public const LOW = 'low';
+
+    /** Enough learning data is available for a standard recap. */
     public const STANDARD = 'standard';
+
+    /** Multiple strong learning signals are available. */
     public const RICH = 'rich';
 
+    /** Celebration experience used when no learning recap can be built. */
     public const EXPERIENCE_CELEBRATION_ONLY = 'celebration_only';
+
+    /** Celebration experience used for recently joined or low-data users. */
     public const EXPERIENCE_BIRTHDAY_WELCOME = 'birthday_welcome';
+
+    /** Celebration experience used for a standard annual learning recap. */
     public const EXPERIENCE_LEARNING_YEAR = 'learning_year';
+
+    /** Celebration experience used when a year-over-year comparison is meaningful. */
     public const EXPERIENCE_LEARNING_YEAR_COMPARISON = 'learning_year_comparison';
 
     /** Maximum account age treated as recently created for welcome-mode purposes. */

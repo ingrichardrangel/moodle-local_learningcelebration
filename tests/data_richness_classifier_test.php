@@ -28,12 +28,18 @@ use local_learningcelebration\local\analytics\period_statistics;
  * @covers    \local_learningcelebration\local\analytics\data_richness_classifier
  */
 final class data_richness_classifier_test extends \advanced_testcase {
-    /** @return period_statistics Empty period helper. */
+    /**
+     * Build an empty period statistics object.
+     *
+     * @return period_statistics Empty period helper.
+     */
     private function empty_period(): period_statistics {
         return new period_statistics(0, 0, 0, 0, null, null, null, null);
     }
 
-    /** No history and no contextual signal remains NONE. */
+    /**
+     * No history and no contextual signal remains NONE.
+     */
     public function test_none_without_learning_signals(): void {
         $classifier = new data_richness_classifier();
 
@@ -43,7 +49,9 @@ final class data_richness_classifier_test extends \advanced_testcase {
         );
     }
 
-    /** A newly created account is LOW rather than an empty annual recap. */
+    /**
+     * A newly created account is LOW rather than an empty annual recap.
+     */
     public function test_recent_account_uses_low_richness(): void {
         $classifier = new data_richness_classifier();
 
@@ -53,7 +61,9 @@ final class data_richness_classifier_test extends \advanced_testcase {
         );
     }
 
-    /** An active enrolment also makes an otherwise empty period useful for welcome mode. */
+    /**
+     * An active enrolment also makes an otherwise empty period useful for welcome mode.
+     */
     public function test_active_enrolment_uses_low_richness(): void {
         $classifier = new data_richness_classifier();
 
@@ -63,7 +73,9 @@ final class data_richness_classifier_test extends \advanced_testcase {
         );
     }
 
-    /** A single badge alone remains LOW so the future UI does not overstate a thin history. */
+    /**
+     * A single badge alone remains LOW so the future UI does not overstate a thin history.
+     */
     public function test_single_badge_remains_low_richness(): void {
         $classifier = new data_richness_classifier();
         $statistics = new period_statistics(0, 0, 1, 0, null, null, null, null);
@@ -71,7 +83,9 @@ final class data_richness_classifier_test extends \advanced_testcase {
         $this->assertSame(data_richness_classifier::LOW, $classifier->classify($statistics));
     }
 
-    /** Five activity completions provide a meaningful standard recap. */
+    /**
+     * Five activity completions provide a meaningful standard recap.
+     */
     public function test_activity_threshold_uses_standard_richness(): void {
         $classifier = new data_richness_classifier();
         $statistics = new period_statistics(0, 5, 0, 0, null, null, null, null);
@@ -79,7 +93,9 @@ final class data_richness_classifier_test extends \advanced_testcase {
         $this->assertSame(data_richness_classifier::STANDARD, $classifier->classify($statistics));
     }
 
-    /** Multiple achievement categories produce RICH data. */
+    /**
+     * Multiple achievement categories produce RICH data.
+     */
     public function test_multiple_categories_use_rich_richness(): void {
         $classifier = new data_richness_classifier();
         $statistics = new period_statistics(2, 12, 1, 2, 88.0, 95.0, 3, 'Example course');
@@ -87,7 +103,9 @@ final class data_richness_classifier_test extends \advanced_testcase {
         $this->assertSame(data_richness_classifier::RICH, $classifier->classify($statistics));
     }
 
-    /** Comparison mode is selected only when both periods are sufficiently meaningful. */
+    /**
+     * Comparison mode is selected only when both periods are sufficiently meaningful.
+     */
     public function test_comparison_experience_requires_previous_standard_data(): void {
         $classifier = new data_richness_classifier();
 
@@ -101,7 +119,9 @@ final class data_richness_classifier_test extends \advanced_testcase {
         );
     }
 
-    /** Comparison can be disabled without removing the annual recap. */
+    /**
+     * Comparison can be disabled without removing the annual recap.
+     */
     public function test_comparison_can_be_disabled_by_site_policy(): void {
         $classifier = new \local_learningcelebration\local\analytics\data_richness_classifier();
         $experience = $classifier->select_experience(

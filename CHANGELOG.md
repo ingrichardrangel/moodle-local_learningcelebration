@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.8.1 - 2026-09-21
+
+- CI remediation release with no new learner-facing features.
+- Renames the annual view table to `local_learningcelebration_vw` for Moodle plugin validation while preserving existing data during upgrade.
+- Corrects PHPUnit privacy-context handling, page-policy testability, Behat navigation steps, PHPDoc, Moodle coding style, Mustache example contexts and CSS lint findings.
+- Normalises Privacy API context identifiers before strict comparison so export and deletion remain reliable across database drivers.
+- Adds `PRIVACY.md` to document data minimisation, ownership, external-service use, export and deletion behaviour.
+- Keeps the 0.8.0 automated quality workflow and compatibility matrix unchanged.
+
 ## 0.8.0 - 2026-09-18
 
 ### Added

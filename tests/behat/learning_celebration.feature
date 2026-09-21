@@ -11,18 +11,18 @@ Feature: Access Learning Celebration administration and learner pages
 
   Scenario: Site administrator can inspect configuration and preview pages
     Given I log in as "admin"
-    When I am on "/local/learningcelebration/status.php"
+    When I visit "/local/learningcelebration/status.php"
     Then I should see "Configuration status"
     And I should see "Birthday engine simulator"
-    When I am on "/local/learningcelebration/preview.php"
+    When I visit "/local/learningcelebration/preview.php"
     Then I should see "Celebration preview"
 
   Scenario: Authenticated learner can access their Learning Celebration preferences
     Given I log in as "learner1"
-    When I am on "/local/learningcelebration/preferences.php"
+    When I visit "/local/learningcelebration/preferences.php"
     Then I should see "Learning Celebration preferences"
     And I should see "Show my annual Learning Celebration automatically"
 
   Scenario: Guest access to learner preferences requires authentication
-    Given I am on "/local/learningcelebration/preferences.php"
+    Given I visit "/local/learningcelebration/preferences.php"
     Then I should see "Log in"

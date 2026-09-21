@@ -2,9 +2,9 @@
 
 Learning Celebration is a local Moodle plugin that celebrates a learner's birthday with a personal annual learning recap based on Moodle core learning records.
 
-## Version 0.8.0
+## Version 0.8.1
 
-Version 0.8.0 is the **automated quality and compatibility milestone**. It intentionally preserves the validated 0.7.0 learner experience while adding repository-level checks designed to catch regressions before a release is packaged.
+Version 0.8.1 is the **CI remediation milestone**. It preserves the validated learner experience while addressing the first full Moodle Plugin CI findings from version 0.8.0.
 
 ### Quality infrastructure
 
@@ -36,7 +36,7 @@ The workflow is committed with the plugin but only runs when the repository is h
 7. Use **Configuration status** to validate the effective policy and current account.
 8. Use **Celebration preview** to inspect visual variants without creating learner-facing completion state.
 
-Upgrading from 0.7.0 to 0.8.0 does not change the database schema or remove existing `local_lc_views` data. The security capabilities, AJAX service and composite user/completion/year index introduced in 0.7.0 remain unchanged.
+Upgrading from 0.8.0 to 0.8.1 renames the existing `local_lc_views` table to `local_learningcelebration_vw` without deleting its records. Fresh installations create the new table name directly.
 
 ## Capabilities
 
@@ -107,7 +107,7 @@ Moodle stores one current activity-completion row per user/activity, so later co
 
 The date of birth remains in Moodle's custom profile-field storage and is not copied into plugin-owned storage.
 
-`local_lc_views` stores only:
+`local_learningcelebration_vw` stores only:
 
 - user id;
 - observed birthday year;
@@ -118,11 +118,11 @@ The date of birth remains in Moodle's custom profile-field storage and is not co
 
 An optional user preference is stored only when a learner disables automatic celebrations. The Privacy API declares, exports and deletes both kinds of plugin-owned data. Version 0.7.0 also correctly discovers and removes preference-only records even when that user has never generated an annual view row.
 
-See `SECURITY.md` for the security model.
+See `PRIVACY.md` for the data-minimisation model and `SECURITY.md` for the security model.
 
-## Testing 0.8.0
+## Testing 0.8.1
 
-The learner-facing runtime is intentionally unchanged from 0.7.0, so the established manual regression sequence should still pass: automatic display, snooze, completion persistence, replay, QA reset, page exclusions, capability restrictions, and privacy behaviour.
+The learner-facing runtime remains functionally unchanged, so the established manual regression sequence should still pass: automatic display, snooze, completion persistence, replay, QA reset, page exclusions, capability restrictions, and privacy behaviour.
 
 For repository validation, push the plugin source to GitHub and inspect the **Moodle Plugin CI** workflow. All matrix jobs should pass before treating a commit as release-ready. The workflow covers Moodle 4.5/5.2, MariaDB/PostgreSQL, PHPUnit, Behat, Moodle coding checks, Mustache, and AMD/Grunt validation.
 
@@ -130,7 +130,7 @@ The Behat suite currently provides smoke coverage rather than a complete browser
 
 ## Roadmap
 
-The next milestone is 0.9.0 beta: run the automated matrix in the public repository, resolve any CI/coding-style findings, perform explicit Moodle 4.5 and 5.2 compatibility passes, prepare Marketplace-facing screenshots/documentation, and freeze the feature set for the 1.0 review candidate.
+The next milestone is 0.9.0 beta after the 0.8.1 CI matrix is fully green: perform explicit Moodle 4.5/5.2 compatibility passes, add Moodle 5.3 validation, prepare Marketplace-facing documentation and freeze the feature set for the 1.0 review candidate.
 
 ## License
 

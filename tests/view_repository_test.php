@@ -22,9 +22,14 @@ use local_learningcelebration\local\celebration\view_repository;
  * Tests for annual celebration view persistence.
  *
  * @package   local_learningcelebration
+ * @copyright 2026 Richard Rangel
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @covers    \local_learningcelebration\local\celebration\view_repository
  */
 final class view_repository_test extends \advanced_testcase {
-    /** Display and completion update one annual record. */
+    /**
+     * Display and completion update one annual record.
+     */
     public function test_display_and_completion_flow(): void {
         $this->resetAfterTest();
         $user = $this->getDataGenerator()->create_user();
@@ -99,5 +104,4 @@ final class view_repository_test extends \advanced_testcase {
         $this->assertNull($repository->get_record((int) $user->id, 2025));
         $this->assertNotNull($repository->get_record((int) $user->id, 2026));
     }
-
 }

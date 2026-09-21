@@ -1,7 +1,40 @@
 {{!
-    Learning Celebration visual experience.
-
     @template local_learningcelebration/celebration
+
+    Reusable annual Learning Celebration slide deck.
+
+    Example context (json):
+    {
+        "motionenabled": true,
+        "slidecount": 2,
+        "brandlabel": "Learning Celebration",
+        "previouslabel": "Previous",
+        "nextlabel": "Next",
+        "restartlabel": "Replay",
+        "isoverlay": false,
+        "slides": [
+            {
+                "kind": "hero",
+                "index": 0,
+                "isfirst": true,
+                "ishero": true,
+                "confettienabled": true,
+                "eyebrow": "Happy birthday",
+                "title": "Happy birthday, Alex!",
+                "body": "Another year of learning begins today.",
+                "slidelabel": "Go to slide 1"
+            },
+            {
+                "kind": "final",
+                "index": 1,
+                "isfirst": false,
+                "eyebrow": "A new year begins",
+                "title": "That was your year. Now comes the next one.",
+                "body": "Keep learning at your own pace.",
+                "slidelabel": "Go to slide 2"
+            }
+        ]
+    }
 }}
 <div class="lc-celebration{{^motionenabled}} lc-motion-disabled{{/motionenabled}}"
     data-region="learning-celebration"

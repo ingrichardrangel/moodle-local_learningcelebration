@@ -24,7 +24,9 @@ namespace local_learningcelebration\form;
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 final class preferences_form extends \moodleform {
-    /** Define form fields. */
+    /**
+     * Define form fields.
+     */
     public function definition(): void {
         $mform = $this->_form;
 

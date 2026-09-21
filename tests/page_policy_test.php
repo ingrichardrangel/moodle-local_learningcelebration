@@ -22,35 +22,51 @@ use local_learningcelebration\local\celebration\page_policy;
  * Tests for automatic-display page safety policy.
  *
  * @package   local_learningcelebration
+ * @copyright 2026 Richard Rangel
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @covers    \local_learningcelebration\local\celebration\page_policy
  */
 final class page_policy_test extends \advanced_testcase {
-    /** Normal course pages are eligible. */
+    /**
+     * Normal course pages are eligible when page rules are evaluated directly.
+     */
     public function test_normal_course_page_is_safe(): void {
         $page = new \moodle_page();
         $page->set_url(new \moodle_url('/course/view.php', ['id' => 2]));
         $page->set_pagelayout('incourse');
         $page->set_pagetype('course-view-topics');
 
-        $this->assertTrue((new page_policy())->is_safe($page));
+        $this->assertTrue((new page_policy())->is_page_safe($page));
     }
 
-    /** Active quiz attempts are excluded. */
+    /**
+     * Active quiz attempts are excluded by page policy.
+     */
     public function test_quiz_attempt_is_not_safe(): void {
         $page = new \moodle_page();
         $page->set_url(new \moodle_url('/mod/quiz/attempt.php', ['attempt' => 4]));
         $page->set_pagelayout('incourse');
         $page->set_pagetype('mod-quiz-attempt');
 
-        $this->assertFalse((new page_policy())->is_safe($page));
+        $this->assertFalse((new page_policy())->is_page_safe($page));
     }
 
-    /** Administration pages are excluded. */
+    /**
+     * Administration pages are excluded by page policy.
+     */
     public function test_admin_page_is_not_safe(): void {
         $page = new \moodle_page();
         $page->set_url(new \moodle_url('/admin/index.php'));
         $page->set_pagelayout('admin');
         $page->set_pagetype('admin-index');
 
-        $this->assertFalse((new page_policy())->is_safe($page));
+        $this->assertFalse((new page_policy())->is_page_safe($page));
+    }
+
+    /**
+     * PHPUnit's CLI environment is excluded from automatic display.
+     */
+    public function test_cli_request_environment_is_not_safe(): void {
+        $this->assertFalse((new page_policy())->is_request_environment_safe());
     }
 }

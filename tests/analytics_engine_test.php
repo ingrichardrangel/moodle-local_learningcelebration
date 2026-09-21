@@ -31,26 +31,50 @@ use local_learningcelebration\local\birthday\birthday_engine;
  * @covers    \local_learningcelebration\local\analytics\analytics_engine
  */
 final class analytics_engine_test extends \advanced_testcase {
-    /** The engine combines period statistics, enrolments and account age into one report. */
+    /**
+     * The engine combines period statistics, enrolments and account age into one report.
+     */
     public function test_builds_adaptive_report(): void {
         $current = new period_statistics(2, 14, 1, 2, 89.5, 96.0, 11, 'Current course');
-        $previous = new period_statistics(1, 7, 0, 1, 82.0, 82.0, 12, 'Previous course');
+        $previous = new period_statistics(1, 4, 0, 1, 82.0, 82.0, 12, 'Previous course');
 
-        $repository = new class($current, $previous) extends analytics_repository {
-            /** @var period_statistics[] */
+        $repository = new class ($current, $previous) extends analytics_repository {
+            /** @var period_statistics[] Period statistics returned in request order. */
             private array $periods;
 
-            /** @param period_statistics $current Current period. @param period_statistics $previous Previous period. */
+            /**
+             * Create the deterministic test repository.
+             *
+             * @param period_statistics $current Current period.
+             * @param period_statistics $previous Previous period.
+             */
             public function __construct(period_statistics $current, period_statistics $previous) {
                 $this->periods = [$current, $previous];
             }
 
-            /** @inheritDoc */
-            public function get_period_statistics(int $userid, int $starttimestamp, int $endtimestamp): period_statistics {
+            /**
+             * Return the next deterministic period statistics object.
+             *
+             * @param int $userid User id.
+             * @param int $starttimestamp Inclusive period start timestamp.
+             * @param int $endtimestamp Exclusive period end timestamp.
+             * @return period_statistics Period statistics.
+             */
+            public function get_period_statistics(
+                int $userid,
+                int $starttimestamp,
+                int $endtimestamp
+            ): period_statistics {
                 return array_shift($this->periods);
             }
 
-            /** @inheritDoc */
+            /**
+             * Return a deterministic active-enrolment count.
+             *
+             * @param int $userid User id.
+             * @param int $attimestamp Timestamp at which enrolments are evaluated.
+             * @return int Active enrolment count.
+             */
             public function count_active_course_enrolments(int $userid, int $attimestamp): int {
                 return 3;
             }

@@ -89,8 +89,10 @@ final class auto_display_service {
         $timezone = $birthdaycontext->get_timezone();
         $celebrationyear = $birthdaycontext->get_celebration_year();
 
-        if (!empty($SESSION->local_learningcelebration_snoozed[$celebrationyear])
-                || !empty($SESSION->local_learningcelebration_completed[$celebrationyear])) {
+        if (
+            !empty($SESSION->local_learningcelebration_snoozed[$celebrationyear])
+            || !empty($SESSION->local_learningcelebration_completed[$celebrationyear])
+        ) {
             return null;
         }
 

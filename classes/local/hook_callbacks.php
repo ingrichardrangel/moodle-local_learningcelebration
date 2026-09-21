@@ -37,11 +37,13 @@ final class hook_callbacks {
     public static function before_footer_html_generation(before_footer_html_generation $hook): void {
         global $PAGE, $SITE, $USER;
 
-        if (during_initial_install()
-                || !get_config('local_learningcelebration', 'version')
-                || !isloggedin()
-                || isguestuser()
-                || empty($USER->id)) {
+        if (
+            during_initial_install()
+            || !get_config('local_learningcelebration', 'version')
+            || !isloggedin()
+            || isguestuser()
+            || empty($USER->id)
+        ) {
             return;
         }
 

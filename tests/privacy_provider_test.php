@@ -28,17 +28,24 @@ use local_learningcelebration\privacy\provider;
  * @covers    \local_learningcelebration\privacy\provider
  */
 final class privacy_provider_test extends \advanced_testcase {
-    /** A stored opt-out preference alone must make the system context discoverable. */
+    /**
+     * A stored opt-out preference alone must make the system context discoverable.
+     */
     public function test_preference_only_user_has_system_context(): void {
         $this->resetAfterTest();
         $user = $this->getDataGenerator()->create_user();
         set_user_preference(auto_display_service::PREF_AUTOSHOW, 0, (int) $user->id);
 
-        $contexts = provider::get_contexts_for_userid((int) $user->id)->get_contextids();
-        $this->assertContains(\context_system::instance()->id, $contexts);
+        $contexts = array_map(
+            'intval',
+            provider::get_contexts_for_userid((int) $user->id)->get_contextids()
+        );
+        $this->assertContains((int) \context_system::instance()->id, $contexts);
     }
 
-    /** Context-wide deletion removes both annual view data and plugin-owned preferences. */
+    /**
+     * Context-wide deletion removes both annual view data and plugin-owned preferences.
+     */
     public function test_context_wide_delete_removes_preferences(): void {
         $this->resetAfterTest();
         $user = $this->getDataGenerator()->create_user();
@@ -61,7 +68,7 @@ final class privacy_provider_test extends \advanced_testcase {
 
         $this->resetAfterTest();
         $user = $this->getDataGenerator()->create_user();
-        $DB->insert_record('local_lc_views', (object) [
+        $DB->insert_record('local_learningcelebration_vw', (object) [
             'userid' => (int) $user->id,
             'celebrationyear' => 2026,
             'timefirstviewed' => 1000,
@@ -71,8 +78,11 @@ final class privacy_provider_test extends \advanced_testcase {
             'timecompleted' => null,
         ]);
 
-        $contexts = provider::get_contexts_for_userid((int) $user->id)->get_contextids();
-        $this->assertContains(\context_system::instance()->id, $contexts);
+        $contexts = array_map(
+            'intval',
+            provider::get_contexts_for_userid((int) $user->id)->get_contextids()
+        );
+        $this->assertContains((int) \context_system::instance()->id, $contexts);
     }
 
     /**
@@ -83,7 +93,7 @@ final class privacy_provider_test extends \advanced_testcase {
 
         $this->resetAfterTest();
         $user = $this->getDataGenerator()->create_user();
-        $DB->insert_record('local_lc_views', (object) [
+        $DB->insert_record('local_learningcelebration_vw', (object) [
             'userid' => (int) $user->id,
             'celebrationyear' => 2026,
             'timefirstviewed' => 1000,
@@ -95,7 +105,6 @@ final class privacy_provider_test extends \advanced_testcase {
 
         provider::delete_data_for_all_users_in_context(\context_system::instance());
 
-        $this->assertFalse($DB->record_exists('local_lc_views', ['userid' => (int) $user->id]));
+        $this->assertFalse($DB->record_exists('local_learningcelebration_vw', ['userid' => (int) $user->id]));
     }
-
 }

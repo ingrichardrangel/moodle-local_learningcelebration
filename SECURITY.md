@@ -18,7 +18,7 @@ Learning Celebration is designed to operate entirely inside Moodle and does not 
 
 The configured birthday remains in Moodle's custom profile-field storage. Learning Celebration reads it to determine birthday eligibility but does not copy it into plugin-owned storage.
 
-The plugin-owned `local_lc_views` table stores only annual display/completion state. Learning metrics are calculated on demand from Moodle core data and are not stored as analytics snapshots.
+The plugin-owned `local_learningcelebration_vw` table stores only annual display/completion state. Learning metrics are calculated on demand from Moodle core data and are not stored as analytics snapshots.
 
 The Privacy API covers both annual view records and the optional auto-show opt-out preference, including users who have only the preference and no annual view record.
 

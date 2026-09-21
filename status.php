@@ -75,17 +75,17 @@ $leapdaylabels = [
         get_string('leapday_mar1', 'local_learningcelebration'),
 ];
 
-/**
- * Build a diagnostic table for a birthday-engine evaluation.
- *
- * @param \local_learningcelebration\local\birthday\evaluation $evaluation Evaluation to display.
- * @param bool $simulationmode Whether the table represents administrator simulation input.
- * @return html_table Diagnostic table.
- */
+// Build a diagnostic table for a birthday-engine evaluation.
 $makeevaluationtable = static function (
     \local_learningcelebration\local\birthday\evaluation $evaluation,
     bool $simulationmode = false
-) use ($yes, $no, $timezoneid, $formatdate, $statelabels): html_table {
+) use (
+    $yes,
+    $no,
+    $timezoneid,
+    $formatdate,
+    $statelabels
+): html_table {
     $table = new html_table();
     $table->attributes['class'] = 'generaltable';
     $table->head = [
@@ -173,11 +173,12 @@ $configtable->data[] = [
     get_string('celebrationwindow', 'local_learningcelebration'),
     $windowlabels[$windowdays] ?? get_string('window_custom', 'local_learningcelebration', $windowdays),
 ];
+$defaultleapdaylabel = $leapdaylabels[
+    \local_learningcelebration\local\birthday\birthday_engine::LEAPDAY_FEBRUARY_28
+];
 $configtable->data[] = [
     get_string('leapdaypolicy', 'local_learningcelebration'),
-    $leapdaylabels[$leapdaypolicy] ?? $leapdaylabels[
-        \local_learningcelebration\local\birthday\birthday_engine::LEAPDAY_FEBRUARY_28
-    ],
+    $leapdaylabels[$leapdaypolicy] ?? $defaultleapdaylabel,
 ];
 
 echo $OUTPUT->header();
@@ -196,7 +197,6 @@ if (!$enabled) {
 
 echo $OUTPUT->heading(get_string('configurationcheck', 'local_learningcelebration'), 3);
 echo html_writer::table($configtable);
-
 
 $policytable = new html_table();
 $policytable->attributes['class'] = 'generaltable';

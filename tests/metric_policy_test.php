@@ -28,7 +28,9 @@ use local_learningcelebration\local\analytics\period_statistics;
  * @covers    \local_learningcelebration\local\analytics\metric_policy
  */
 final class metric_policy_test extends \advanced_testcase {
-    /** Disabled metrics are removed rather than exposed as learner-facing data. */
+    /**
+     * Disabled metrics are removed rather than exposed as learner-facing data.
+     */
     public function test_filters_disabled_metrics(): void {
         $source = new period_statistics(3, 18, 4, 2, 88.5, 96.0, 17, 'Example course');
         $policy = new metric_policy(false, true, false, false, false, false);
