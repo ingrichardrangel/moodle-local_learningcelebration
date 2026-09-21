@@ -79,7 +79,12 @@ $wraptable = static function (html_table $table): string {
     return html_writer::div(html_writer::table($table), 'table-responsive');
 };
 
-$renderpanel = static function (string $title, string $content, ?string $intro = null, string $extraclass = '') use ($OUTPUT): string {
+$renderpanel = static function (
+    string $title,
+    string $content,
+    ?string $intro = null,
+    string $extraclass = ''
+) use ($OUTPUT): string {
     $classes = trim('lc-admin-panel ' . $extraclass);
     $panel = html_writer::start_div($classes);
     $panel .= html_writer::start_div('lc-admin-panel__header');
