@@ -1,0 +1,27 @@
+{{!
+    Automatic Learning Celebration overlay.
+
+    @template local_learningcelebration/overlay
+}}
+<div id="{{rootid}}"
+     class="lc-auto-overlay{{^motionenabled}} lc-motion-disabled{{/motionenabled}}"
+     data-region="celebration-overlay"
+     data-overlay-state="pending">
+    <div class="lc-auto-overlay__scrim" aria-hidden="true"></div>
+    <div class="lc-auto-overlay__dialog"
+         role="dialog"
+         aria-modal="true"
+         aria-label="{{dialoglabel}}"
+         tabindex="-1"
+         data-region="overlay-dialog">
+        <div class="lc-auto-overlay__topbar">
+            <button type="button" class="btn btn-link lc-auto-overlay__dismiss" data-action="notnow">
+                {{notnowlabel}}
+            </button>
+        </div>
+        <div class="lc-auto-overlay__status alert alert-danger" data-region="action-status" hidden>
+            {{actionerror}}
+        </div>
+        {{> local_learningcelebration/celebration }}
+    </div>
+</div>

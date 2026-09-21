@@ -1,0 +1,123 @@
+{{!
+    Learning Celebration visual experience.
+
+    @template local_learningcelebration/celebration
+}}
+<div class="lc-celebration{{^motionenabled}} lc-motion-disabled{{/motionenabled}}"
+    data-region="learning-celebration"
+    data-slide-count="{{slidecount}}">
+    <div class="lc-celebration__ambient" aria-hidden="true">
+        <span class="lc-orb lc-orb--one"></span>
+        <span class="lc-orb lc-orb--two"></span>
+        <span class="lc-orb lc-orb--three"></span>
+    </div>
+
+    <div class="lc-celebration__frame">
+        <header class="lc-celebration__header">
+            <div class="lc-celebration__brand">{{brandlabel}}</div>
+            <div class="lc-celebration__counter" data-region="counter" aria-live="polite">1 / {{slidecount}}</div>
+        </header>
+
+        <div class="lc-celebration__slides" data-region="slides">
+            {{#slides}}
+                <section class="lc-slide lc-slide--{{kind}}"
+                         data-slide="{{index}}"
+                         aria-hidden="{{^isfirst}}true{{/isfirst}}{{#isfirst}}false{{/isfirst}}"
+                         {{^isfirst}}hidden{{/isfirst}}>
+                    {{#ishero}}
+                        {{#confettienabled}}
+                            <div class="lc-confetti" aria-hidden="true">
+                                <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                            </div>
+                        {{/confettienabled}}
+                    {{/ishero}}
+
+                    <div class="lc-slide__content">
+                        <div class="lc-slide__eyebrow">{{eyebrow}}</div>
+                        <h2 class="lc-slide__title">{{title}}</h2>
+                        {{#body}}<p class="lc-slide__body">{{body}}</p>{{/body}}
+
+                        {{#hasperiod}}
+                            <div class="lc-period" aria-label="{{title}}">
+                                <div class="lc-period__point">
+                                    <span class="lc-period__dot" aria-hidden="true"></span>
+                                    <span>{{periodstart}}</span>
+                                </div>
+                                <span class="lc-period__line" aria-hidden="true"></span>
+                                <div class="lc-period__point lc-period__point--end">
+                                    <span class="lc-period__dot" aria-hidden="true"></span>
+                                    <span>{{periodend}}</span>
+                                </div>
+                            </div>
+                        {{/hasperiod}}
+
+                        {{#hasmetrics}}
+                            <div class="lc-metrics">
+                                {{#metrics}}
+                                    <div class="lc-metric">
+                                        <strong class="lc-metric__value">{{value}}</strong>
+                                        <span class="lc-metric__label">{{label}}</span>
+                                    </div>
+                                {{/metrics}}
+                            </div>
+                        {{/hasmetrics}}
+
+                        {{#hashighlight}}
+                            <div class="lc-highlight">
+                                <div class="lc-highlight__mark" aria-hidden="true">★</div>
+                                <div class="lc-highlight__course">{{coursename}}</div>
+                                <div class="lc-highlight__grade">{{coursegrade}}</div>
+                            </div>
+                        {{/hashighlight}}
+
+                        {{#hascomparison}}
+                            <div class="lc-comparison">
+                                <div class="lc-comparison__head" aria-hidden="true">
+                                    <span></span>
+                                    <span>{{#str}} visual_thisyear, local_learningcelebration {{/str}}</span>
+                                    <span>{{#str}} visual_previousyear, local_learningcelebration {{/str}}</span>
+                                </div>
+                                {{#comparisons}}
+                                    <div class="lc-comparison__row">
+                                        <span class="lc-comparison__label">{{label}}</span>
+                                        <strong>{{current}}</strong>
+                                        <span>{{previous}}</span>
+                                    </div>
+                                {{/comparisons}}
+                            </div>
+                        {{/hascomparison}}
+                    </div>
+                </section>
+            {{/slides}}
+        </div>
+
+        <footer class="lc-celebration__footer">
+            <button type="button" class="btn btn-secondary lc-control" data-action="previous" disabled>
+                {{previouslabel}}
+            </button>
+
+            <div class="lc-progress" role="group" aria-label="{{#str}} visual_progress, local_learningcelebration {{/str}}">
+                {{#slides}}
+                    <button type="button"
+                            class="lc-progress__dot{{#isfirst}} is-active{{/isfirst}}"
+                            data-action="goto"
+                            data-target-slide="{{index}}"
+                            aria-current="{{#isfirst}}step{{/isfirst}}{{^isfirst}}false{{/isfirst}}"
+                            aria-label="{{slidelabel}}"></button>
+                {{/slides}}
+            </div>
+
+            <button type="button" class="btn btn-primary lc-control" data-action="next">
+                {{nextlabel}}
+            </button>
+            <button type="button" class="btn btn-secondary lc-control" data-action="restart" hidden>
+                {{restartlabel}}
+            </button>
+            {{#isoverlay}}
+                <button type="button" class="btn btn-primary lc-control" data-action="finish" hidden>
+                    {{finishlabel}}
+                </button>
+            {{/isoverlay}}
+        </footer>
+    </div>
+</div>
