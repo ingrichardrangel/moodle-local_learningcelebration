@@ -687,3 +687,129 @@ body.lc-celebration-open {
 .lc-celebration.lc-motion-disabled .lc-confetti {
     display: none;
 }
+
+/* 1.0.0 stable visual refinements. */
+.lc-admin-status {
+    display: grid;
+    gap: 1.35rem;
+    margin: 1.5rem 0 2rem;
+}
+
+.lc-admin-panel {
+    background: var(--bs-body-bg, #fff);
+    border: 1px solid rgba(127, 127, 127, .18);
+    border-radius: 20px;
+    box-shadow: 0 12px 34px rgba(15, 23, 42, .05);
+    overflow: hidden;
+    padding: 1.15rem 1.2rem 1.25rem;
+}
+
+.lc-admin-panel__header {
+    display: grid;
+    gap: .8rem;
+    margin-bottom: 1rem;
+}
+
+.lc-admin-panel__title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.lc-admin-panel__subtitle {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 1.1rem 0 .85rem;
+}
+
+.lc-admin-panel__intro .alert,
+.lc-admin-status > .notification {
+    margin-bottom: 0;
+}
+
+.lc-admin-panel__body > .table-responsive + .table-responsive,
+.lc-admin-panel__body > .notification + .table-responsive,
+.lc-admin-panel__body > .table-responsive + .notification,
+.lc-admin-panel__body > .notification + .notification {
+    margin-top: 1rem;
+}
+
+.lc-admin-panel__body .generaltable {
+    margin-bottom: 0;
+}
+
+.lc-admin-actions,
+.lc-admin-simulator__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+}
+
+.lc-admin-actions .btn,
+.lc-admin-simulator__actions .btn {
+    margin-right: 0 !important;
+}
+
+.lc-admin-panel--actions {
+    padding: 1rem 1.2rem;
+}
+
+.lc-admin-reset {
+    margin-top: 1rem;
+}
+
+.lc-admin-reset .singlebutton {
+    margin-bottom: 0;
+}
+
+.lc-admin-resethelp {
+    margin-top: .65rem;
+}
+
+.lc-admin-simulator {
+    margin-bottom: 0;
+}
+
+.lc-admin-simulator .row {
+    row-gap: .15rem;
+}
+
+.lc-admin-panel .table-responsive {
+    overflow-x: auto;
+}
+
+.lc-auto-overlay__dialog .lc-celebration__header {
+    padding-right: 12rem;
+}
+
+.lc-auto-overlay__topbar {
+    right: 1rem;
+    top: .95rem;
+}
+
+.lc-auto-overlay__dismiss {
+    box-shadow: 0 8px 24px rgba(15, 23, 42, .08);
+    white-space: nowrap;
+}
+
+@media (max-width: 767.98px) {
+    .lc-admin-panel {
+        border-radius: 16px;
+        padding: 1rem;
+    }
+
+    .lc-admin-panel__title {
+        font-size: 1.2rem;
+    }
+
+    .lc-auto-overlay__dialog .lc-celebration__header {
+        padding-right: 1.2rem;
+        padding-top: 4rem;
+    }
+
+    .lc-auto-overlay__topbar {
+        left: .7rem;
+        right: .7rem;
+        top: .65rem;
+    }
+}

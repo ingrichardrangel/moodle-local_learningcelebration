@@ -42,13 +42,17 @@ The public repository includes PHPUnit and Behat coverage with Moodle Plugin CI 
 - recognition
 - student experience
 
-## Supported versions for the 1.0 candidate
+## Supported versions for 1.0.0
 
-The intended public range is Moodle 4.5 through Moodle 5.3. Moodle 5.3 should remain in the final support statement only after the `MOODLE_503_STABLE` CI jobs and manual beta checks are green.
+Learning Celebration 1.0.0 declares Moodle 4.5 through Moodle 5.3 as its supported range. Moodle 5.3 compatibility was exercised through the public automated-test matrix before the stable release.
 
 ## Privacy statement for the listing
 
 Learning Celebration reads an administrator-selected Date/Time profile field and selected Moodle core learning records only to build the birthday experience. Dates of birth and learning analytics are not copied into plugin-owned storage. The plugin stores only annual display/completion state and an optional automatic-display preference. No personal data is sent to external services.
+
+## Early bird 5.3 release note
+
+Version 1.0.0 explicitly declares Moodle 5.3 support after automated compatibility testing. Publish the 5.3-compatible Marketplace version before the Early bird 5.3 deadline. Do not claim the badge until Moodle grants it.
 
 ## Automated testing statement for the listing
 

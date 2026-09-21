@@ -1,6 +1,6 @@
 # Release checklist
 
-This checklist is the acceptance gate for the Learning Celebration 1.0 release candidate.
+This checklist records the acceptance gate for the Learning Celebration 1.0.0 stable release.
 
 ## Source and metadata
 

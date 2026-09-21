@@ -75,6 +75,25 @@ $leapdaylabels = [
         get_string('leapday_mar1', 'local_learningcelebration'),
 ];
 
+$wraptable = static function (html_table $table): string {
+    return html_writer::div(html_writer::table($table), 'table-responsive');
+};
+
+$renderpanel = static function (string $title, string $content, ?string $intro = null, string $extraclass = '') use ($OUTPUT): string {
+    $classes = trim('lc-admin-panel ' . $extraclass);
+    $panel = html_writer::start_div($classes);
+    $panel .= html_writer::start_div('lc-admin-panel__header');
+    $panel .= html_writer::tag('h3', $title, ['class' => 'lc-admin-panel__title']);
+    if ($intro !== null && $intro !== '') {
+        $panel .= html_writer::div($OUTPUT->notification($intro, 'info'), 'lc-admin-panel__intro');
+    }
+    $panel .= html_writer::end_div();
+    $panel .= html_writer::div($content, 'lc-admin-panel__body');
+    $panel .= html_writer::end_div();
+
+    return $panel;
+};
+
 // Build a diagnostic table for a birthday-engine evaluation.
 $makeevaluationtable = static function (
     \local_learningcelebration\local\birthday\evaluation $evaluation,
@@ -184,6 +203,8 @@ echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string('statuspage', 'local_learningcelebration'));
 echo $OUTPUT->notification(get_string('statusintro', 'local_learningcelebration'), 'info');
 
+echo html_writer::start_div('lc-admin-status');
+
 if ($shortname === '') {
     echo $OUTPUT->notification(get_string('warningnofieldconfigured', 'local_learningcelebration'), 'warning');
 } else if (!$field) {
@@ -194,8 +215,10 @@ if (!$enabled) {
     echo $OUTPUT->notification(get_string('warningdisabled', 'local_learningcelebration'), 'warning');
 }
 
-echo $OUTPUT->heading(get_string('configurationcheck', 'local_learningcelebration'), 3);
-echo html_writer::table($configtable);
+echo $renderpanel(
+    get_string('configurationcheck', 'local_learningcelebration'),
+    $wraptable($configtable)
+);
 
 $policytable = new html_table();
 $policytable->attributes['class'] = 'generaltable';
@@ -219,9 +242,11 @@ $policytable->data = [
     [get_string('policy_motion', 'local_learningcelebration'), $presentationoptions->motion_enabled() ? $yes : $no],
     [get_string('policy_confetti', 'local_learningcelebration'), $presentationoptions->confetti_enabled() ? $yes : $no],
 ];
-echo $OUTPUT->heading(get_string('contentpolicyheading', 'local_learningcelebration'), 3);
-echo $OUTPUT->notification(get_string('contentpolicyintro', 'local_learningcelebration'), 'info');
-echo html_writer::table($policytable);
+echo $renderpanel(
+    get_string('contentpolicyheading', 'local_learningcelebration'),
+    $wraptable($policytable),
+    get_string('contentpolicyintro', 'local_learningcelebration')
+);
 
 $engine = new \local_learningcelebration\local\birthday\birthday_engine();
 $liveevaluation = null;
@@ -234,9 +259,11 @@ if ($field && $birthtimestamp !== null) {
         $leapdaypolicy
     );
 
-    echo $OUTPUT->heading(get_string('birthdayengine', 'local_learningcelebration'), 3);
-    echo $OUTPUT->notification(get_string('birthdayengine_intro', 'local_learningcelebration'), 'info');
-    echo html_writer::table($makeevaluationtable($liveevaluation));
+    echo $renderpanel(
+        get_string('birthdayengine', 'local_learningcelebration'),
+        $wraptable($makeevaluationtable($liveevaluation)),
+        get_string('birthdayengine_intro', 'local_learningcelebration')
+    );
 }
 
 // Read-only learning analytics diagnostics for the completed birthday-to-birthday periods.
@@ -298,8 +325,7 @@ if ($liveevaluation) {
         ]);
     };
 
-    echo $OUTPUT->heading(get_string('analyticsheading', 'local_learningcelebration'), 3);
-    echo $OUTPUT->notification(get_string('analyticsintro', 'local_learningcelebration'), 'info');
+    $analyticscontent = '';
 
     $analyticsoverview = new html_table();
     $analyticsoverview->attributes['class'] = 'generaltable';
@@ -345,7 +371,7 @@ if ($liveevaluation) {
             $analyticsreport->is_comparison_available() ? $yes : $no,
         ],
     ]);
-    echo html_writer::table($analyticsoverview);
+    $analyticscontent .= $wraptable($analyticsoverview);
 
     $currentstatistics = $analyticsreport->get_current_period();
     $previousstatistics = $analyticsreport->get_previous_period();
@@ -411,13 +437,19 @@ if ($liveevaluation) {
             get_string('policy_disabledmetric', 'local_learningcelebration'),
         ];
     }
-    echo html_writer::table($analyticstable);
+    $analyticscontent .= $wraptable($analyticstable);
     if ($metricpolicy->includes_completed_activities()) {
-        echo $OUTPUT->notification(get_string('analyticsactivitynote', 'local_learningcelebration'), 'info');
+        $analyticscontent .= $OUTPUT->notification(get_string('analyticsactivitynote', 'local_learningcelebration'), 'info');
     }
     if ($metricpolicy->includes_grades()) {
-        echo $OUTPUT->notification(get_string('analyticsgradenote', 'local_learningcelebration'), 'info');
+        $analyticscontent .= $OUTPUT->notification(get_string('analyticsgradenote', 'local_learningcelebration'), 'info');
     }
+
+    echo $renderpanel(
+        get_string('analyticsheading', 'local_learningcelebration'),
+        $analyticscontent,
+        get_string('analyticsintro', 'local_learningcelebration')
+    );
 }
 
 // Automatic-display state for the current administrator.
@@ -431,8 +463,7 @@ if ($liveevaluation) {
         $USER->id
     );
 
-    echo $OUTPUT->heading(get_string('autodisplayheading', 'local_learningcelebration'), 3);
-    echo $OUTPUT->notification(get_string('autodisplayintro', 'local_learningcelebration'), 'info');
+    $autocontent = '';
 
     $autotable = new html_table();
     $autotable->attributes['class'] = 'generaltable';
@@ -465,14 +496,14 @@ if ($liveevaluation) {
                 : get_string('notavailable', 'local_learningcelebration'),
         ],
     ];
-    echo html_writer::table($autotable);
+    $autocontent .= $wraptable($autotable);
 
     if ($viewrecord) {
         $reseturl = new moodle_url('/local/learningcelebration/reset.php', [
             'celebrationyear' => $celebrationyear,
             'sesskey' => sesskey(),
         ]);
-        echo html_writer::div(
+        $autocontent .= html_writer::div(
             $OUTPUT->single_button(
                 $reseturl,
                 get_string('autodisplay_reset', 'local_learningcelebration'),
@@ -480,11 +511,17 @@ if ($liveevaluation) {
                 ['class' => 'btn-secondary']
             ) . html_writer::div(
                 get_string('autodisplay_reset_help', 'local_learningcelebration'),
-                'text-muted small mt-2'
+                'text-muted small lc-admin-resethelp'
             ),
-            'mb-4'
+            'lc-admin-reset'
         );
     }
+
+    echo $renderpanel(
+        get_string('autodisplayheading', 'local_learningcelebration'),
+        $autocontent,
+        get_string('autodisplayintro', 'local_learningcelebration')
+    );
 }
 
 // Administrator-only, non-persistent birthday-engine simulator.
@@ -503,13 +540,10 @@ if (!array_key_exists($simleapdaypolicy, $leapdaylabels)) {
     $simleapdaypolicy = $leapdaypolicy;
 }
 
-echo $OUTPUT->heading(get_string('simulatorheading', 'local_learningcelebration'), 3);
-echo $OUTPUT->notification(get_string('simulatorintro', 'local_learningcelebration'), 'info');
-
 $form = html_writer::start_tag('form', [
     'method' => 'post',
     'action' => new moodle_url('/local/learningcelebration/status.php'),
-    'class' => 'mb-4',
+    'class' => 'lc-admin-simulator',
 ]);
 $form .= html_writer::empty_tag('input', [
     'type' => 'hidden',
@@ -578,18 +612,20 @@ $form .= html_writer::select($leapdaylabels, 'simleapdaypolicy', $simleapdaypoli
 $form .= html_writer::end_div();
 $form .= html_writer::end_div();
 
+$form .= html_writer::start_div('lc-admin-simulator__actions');
 $form .= html_writer::tag('button', get_string('runsimulation', 'local_learningcelebration'), [
     'type' => 'submit',
-    'class' => 'btn btn-primary mr-2',
+    'class' => 'btn btn-primary',
 ]);
 $form .= html_writer::link(
     new moodle_url('/local/learningcelebration/status.php'),
     get_string('resetsimulation', 'local_learningcelebration'),
     ['class' => 'btn btn-secondary']
 );
+$form .= html_writer::end_div();
 $form .= html_writer::end_tag('form');
 
-echo $form;
+$simulatorcontent = $form;
 
 if ($runsimulation) {
     require_sesskey();
@@ -604,31 +640,42 @@ if ($runsimulation) {
             $simleapdaypolicy
         );
 
-        echo $OUTPUT->heading(get_string('simulationresult', 'local_learningcelebration'), 4);
-        echo html_writer::table($makeevaluationtable($simulation, true));
+        $simulatorcontent .= html_writer::tag(
+            'h4',
+            get_string('simulationresult', 'local_learningcelebration'),
+            ['class' => 'lc-admin-panel__subtitle']
+        );
+        $simulatorcontent .= $wraptable($makeevaluationtable($simulation, true));
     } catch (\InvalidArgumentException $exception) {
-        echo $OUTPUT->notification(get_string('simulationinvalid', 'local_learningcelebration'), 'error');
+        $simulatorcontent .= $OUTPUT->notification(get_string('simulationinvalid', 'local_learningcelebration'), 'error');
     }
 }
+
+echo $renderpanel(
+    get_string('simulatorheading', 'local_learningcelebration'),
+    $simulatorcontent,
+    get_string('simulatorintro', 'local_learningcelebration')
+);
 
 $actions = html_writer::div(
     html_writer::link(
         new moodle_url('/admin/settings.php', ['section' => 'local_learningcelebration']),
         get_string('opensettings', 'local_learningcelebration'),
-        ['class' => 'btn btn-primary mr-2']
-    ) . ' ' .
+        ['class' => 'btn btn-primary']
+    ) .
     html_writer::link(
         new moodle_url('/local/learningcelebration/preview.php'),
         get_string('openpreview', 'local_learningcelebration'),
-        ['class' => 'btn btn-secondary mr-2']
-    ) . ' ' .
+        ['class' => 'btn btn-secondary']
+    ) .
     html_writer::link(
         new moodle_url('/user/profile/index.php'),
         get_string('manageprofilefields', 'local_learningcelebration'),
         ['class' => 'btn btn-secondary']
     ),
-    'mt-4'
+    'lc-admin-actions'
 );
 
-echo $actions;
+echo html_writer::div($actions, 'lc-admin-panel lc-admin-panel--actions');
+echo html_writer::end_div();
 echo $OUTPUT->footer();

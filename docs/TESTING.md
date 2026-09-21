@@ -16,7 +16,7 @@ Every push and pull request runs:
 - PHPUnit;
 - Behat smoke tests with Chrome.
 
-## CI matrix for 0.9.0 Beta
+## CI matrix for 1.0.0 Stable
 
 - Moodle 4.5 / PHP 8.1 / MariaDB
 - Moodle 4.5 / PHP 8.3 / PostgreSQL
@@ -25,7 +25,7 @@ Every push and pull request runs:
 - Moodle 5.3 / PHP 8.3 / MariaDB
 - Moodle 5.3 / PHP 8.4 / PostgreSQL
 
-Moodle 5.3 is in its pre-release cycle during development of 0.9.0. A green 5.3 matrix is required before the compatibility claim is carried into the 1.0 candidate.
+The 1.0.0 stable release declares Moodle 5.3 support after the Moodle 5.3 code line passed the same automated quality gate used for the other supported branches.
 
 ## PHPUnit scope
 
@@ -49,9 +49,9 @@ The PHPUnit suite covers, among other areas:
 
 The Behat suite provides browser-level smoke coverage for administrator diagnostics/preview, authenticated learner preferences and guest authentication enforcement. Calendar and analytics edge cases are intentionally covered primarily by PHPUnit and the deterministic administrator simulator.
 
-## Manual beta regression
+## Manual stable-release regression
 
-Before promoting a beta commit to a release candidate, test with developer debugging enabled:
+Before publishing a stable release, test with developer debugging enabled:
 
 1. Install from a clean ZIP.
 2. Upgrade from 0.8.1.

@@ -4,18 +4,16 @@
 
 Learning Celebration is a free local Moodle plugin that celebrates a learner's birthday with a privacy-conscious annual learning recap built from Moodle core learning records.
 
-## Version 0.9.0 Beta
+## Version 1.0.0 Stable
 
-Version 0.9.0 is the **publication-preparation beta**. The learner-facing feature set is frozen while compatibility, documentation, testing evidence and Marketplace materials are prepared for the 1.0 review candidate.
+Version 1.0.0 is the first **stable public release** of Learning Celebration. It promotes the feature-complete and fully tested 0.9.0 codebase to stable status without introducing new learner-facing behaviour or database-schema changes.
 
-There are no new learner-facing features or database-schema changes in this release.
-
-### Compatibility target
+### Compatibility
 
 - Moodle 4.5 through Moodle 5.3.
 - PHP version supported by the selected Moodle branch.
 - MariaDB and PostgreSQL are exercised by the public CI matrix.
-- Moodle 5.3 testing uses the `MOODLE_503_STABLE` branch during the pre-release period and must remain green before 5.3 support is treated as release-ready.
+- Moodle 5.3 compatibility was validated against the current Moodle 5.3 code line used by CI before the stable release.
 
 The CI matrix currently targets:
 
@@ -136,7 +134,7 @@ See [SECURITY.md](SECURITY.md) for the complete security model.
 
 The repository contains PHPUnit and Behat tests and a Moodle Plugin CI workflow. The pipeline runs PHP lint, Moodle Code Checker, PHPDoc checks, plugin validation, upgrade-savepoint validation, Mustache linting, Grunt/AMD validation, PHPUnit and Behat.
 
-Version 0.8.1 established a fully green CI baseline for Moodle 4.5 and 5.2 on MariaDB and PostgreSQL. Version 0.9.0 extends that same matrix to Moodle 5.3.
+The stable 1.0.0 release retains the green CI baseline across Moodle 4.5, Moodle 5.2 and the Moodle 5.3 code line, with MariaDB and PostgreSQL coverage.
 
 See [docs/TESTING.md](docs/TESTING.md) and [docs/RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md).
 

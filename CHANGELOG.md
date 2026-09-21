@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.0.0 - 2026-09-21
+
+### Stable release
+
+- First stable release of Learning Celebration.
+- Declares support for Moodle 4.5 through Moodle 5.3.
+- Promotes the fully tested 0.9.0 feature set to `MATURITY_STABLE` without learner-facing runtime changes.
+- Applies final interface polish to the birthday overlay and reorganises the Configuration status experience for clearer spacing and administrator review.
+- Keeps the privacy-minimised birthday-to-birthday recap, adaptive presentation modes, safe-page automatic display, replay, learner opt-out, administrator simulation/preview tools and configurable recap policy.
+- Retains full Moodle Privacy API coverage and no external-service dependencies.
+- Retains PHPUnit and Behat coverage with Moodle Plugin CI across Moodle 4.5, 5.2 and the Moodle 5.3 code line, MariaDB and PostgreSQL.
+
+### Release validation
+
+- PHP lint, Moodle Code Checker, PHPDoc Checker, plugin validation, upgrade savepoints, Mustache, Grunt/AMD/CSS, PHPUnit and Behat are green in the public CI matrix used for the stable release.
+- Moodle 5.3 compatibility is explicitly declared for Marketplace publication and Early bird 5.3 eligibility.
+
 ## 0.9.0 - 2026-09-21
 
 ### Added
