@@ -65,5 +65,5 @@ This checklist records the acceptance gate for the Learning Celebration 1.0.0 st
 - [ ] Screenshot set contains no personal or institution-sensitive data.
 - [ ] Reviewer test path is documented.
 - [ ] Supported Moodle versions match proven CI/manual results.
-- [ ] Free/GPL distribution information is correct.
+- [ ] Marketplace listing is set to Free and its description matches the GNU GPL licensing information.
 - [ ] No award is claimed before Moodle grants it.

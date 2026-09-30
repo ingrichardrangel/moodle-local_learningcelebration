@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.1 - 2026-09-25
+
+### Marketplace review follow-up
+
+- Prevent the birthday recap from showing course totals unless the course allows learner grades, the learner has grade-view permission, and no hidden assessment or user grade can affect the total. Courses with hidden grades are excluded from both the average and the best-course highlight.
+- Convert concatenated English language strings into individual literal assignments.
+- Add complete Moodle GPL headers to AMD source, Mustache templates and CSS.
+- Keep README and Marketplace preparation notes aligned with free distribution and the GNU GPL licence.
+- No database schema changes.
+
 ## 1.0.0 - 2026-09-21
 
 ### Stable release

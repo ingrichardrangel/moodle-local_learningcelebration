@@ -129,9 +129,9 @@ class analytics_repository {
     /**
      * Return a normalised grade summary for courses completed during the period.
      *
-     * Only visible course grade items and visible user grade records are used. This prevents
-     * the celebration from exposing a grade which Moodle currently marks as hidden. The period
-     * is determined by course completion time; the grade value is the current final course grade.
+     * Grades are included only when the learner may view them and no hidden grade items or
+     * grades can contribute to the course total. The period is determined by course completion
+     * time; the grade value is the current final course grade.
      *
      * @param int $userid User id.
      * @param int $starttimestamp Inclusive start timestamp.
@@ -147,6 +147,7 @@ class analytics_repository {
 
         $sql = "SELECT c.id AS courseid,
                        c.fullname,
+                       c.showgrades,
                        gg.finalgrade,
                        gi.grademin,
                        gi.grademax
@@ -167,6 +168,7 @@ class analytics_repository {
                    AND gi.hidden = :itemvisible
                    AND gg.hidden = :gradevisible
                    AND c.visible = :coursevisible
+                   AND c.showgrades = :showgrades
                    AND gi.grademax > gi.grademin";
 
         $records = $DB->get_records_sql($sql, [
@@ -177,6 +179,7 @@ class analytics_repository {
             'itemvisible' => 0,
             'gradevisible' => 0,
             'coursevisible' => 1,
+            'showgrades' => 1,
         ]);
 
         if (!$records) {
@@ -190,6 +193,16 @@ class analytics_repository {
         $bestcoursename = null;
 
         foreach ($records as $record) {
+            // A course total can include assessments hidden from the learner even when the
+            // course-total grade item and the learner's course-total row are themselves visible.
+            $context = \context_course::instance((int) $record->courseid);
+            if (
+                !has_capability('moodle/grade:view', $context, $userid) ||
+                $this->course_has_hidden_grades((int) $record->courseid, $userid)
+            ) {
+                continue;
+            }
+
             $minimum = (float) $record->grademin;
             $maximum = (float) $record->grademax;
             if ($maximum <= $minimum) {
@@ -218,6 +231,41 @@ class analytics_repository {
             $bestcourseid,
             $bestcoursename
         );
+    }
+
+    /**
+     * Whether the course total could include a grade currently hidden from this learner.
+     *
+     * This deliberately omits the whole course total instead of attempting to reproduce
+     * gradebook aggregation. It remains safe for every hide-totals setting, including when
+     * the site would otherwise show a total containing hidden items.
+     *
+     * @param int $courseid Course id.
+     * @param int $userid Learner id.
+     * @return bool
+     */
+    protected function course_has_hidden_grades(int $courseid, int $userid): bool {
+        global $DB;
+
+        $sql = "SELECT 1
+                  FROM {grade_items} hiddenitem
+             LEFT JOIN {grade_grades} hiddenuser
+                    ON hiddenuser.itemid = hiddenitem.id
+                   AND hiddenuser.userid = :userid
+                 WHERE hiddenitem.courseid = :courseid
+                   AND hiddenitem.itemtype <> :courseitemtype
+                   AND hiddenitem.deleted = 0
+                   AND ((hiddenitem.hidden = 1 OR hiddenitem.hidden > :itemnow)
+                        OR (hiddenuser.hidden = 1 OR hiddenuser.hidden > :gradenow))";
+
+        $now = time();
+        return $DB->record_exists_sql($sql, [
+            'userid' => $userid,
+            'courseid' => $courseid,
+            'courseitemtype' => 'course',
+            'itemnow' => $now,
+            'gradenow' => $now,
+        ]);
     }
 
     /**
