@@ -134,7 +134,7 @@ See [SECURITY.md](SECURITY.md) for the complete security model.
 
 The repository contains PHPUnit and Behat tests and a Moodle Plugin CI workflow. The pipeline runs PHP lint, Moodle Code Checker, PHPDoc checks, plugin validation, upgrade-savepoint validation, Mustache linting, Grunt/AMD validation, PHPUnit and Behat.
 
-Version 1.0.0 established a green CI baseline across Moodle 4.5, Moodle 5.2 and the Moodle 5.3 code line, with MariaDB and PostgreSQL coverage. Run the CI matrix again for version 1.0.1 before publishing it.
+Version 1.0.1 established a green CI baseline across Moodle 4.5, Moodle 5.2 and the Moodle 5.3 code line, with MariaDB and PostgreSQL coverage.
 
 See [docs/TESTING.md](docs/TESTING.md) and [docs/RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md).
 
