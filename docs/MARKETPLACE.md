@@ -8,7 +8,7 @@ This file contains draft Marketplace-facing material for Learning Celebration. I
 - Frankenstyle component: `local_learningcelebration`
 - Plugin type: Local plugin
 - Licence: GNU GPL v3 or later
-- Distribution: Free
+- Intended Marketplace distribution: Free
 - Maintainer: Richard Rangel
 - Source: https://github.com/ingrichardrangel/moodle-local_learningcelebration
 - Issues: https://github.com/ingrichardrangel/moodle-local_learningcelebration/issues
@@ -21,9 +21,9 @@ Celebrate learners on their birthday with a privacy-conscious annual recap of co
 
 ## Full description
 
-Learning Celebration adds an optional birthday experience to Moodle. During a configurable birthday window, an eligible learner can receive a full-screen celebration containing an annual learning recap calculated from Moodle core records.
+Learning Celebration is a free Moodle plugin that adds an optional birthday experience. During a configurable birthday window, an eligible learner can receive a full-screen celebration containing an annual learning recap calculated from Moodle core records. The source code is licensed under GNU GPL v3 or later.
 
-The recap adapts to the amount of meaningful history available. A newly registered learner is welcomed without being shown a wall of zero-value statistics, while learners with richer history can see completed courses, completed activities, badges and optional visible final course grades. When sufficient information exists for two completed birthday-to-birthday periods, the site may also enable a neutral year-over-year comparison.
+The recap adapts to the amount of meaningful history available. A newly registered learner is welcomed without being shown a wall of zero-value statistics, while learners with richer history can see completed courses, completed activities, badges and optional final course grades that are visible to them. Courses with hidden assessments are excluded from grade calculations. When sufficient information exists for two completed birthday-to-birthday periods, the site may also enable a neutral year-over-year comparison.
 
 Administrators choose which Date/Time custom profile field contains the date of birth and may independently disable grades, badges, activity counts, course counts, active-enrolment context or annual comparisons. Motion and decorative confetti can also be disabled. Browser-level reduced-motion preferences are respected.
 
@@ -42,9 +42,9 @@ The public repository includes PHPUnit and Behat coverage with Moodle Plugin CI 
 - recognition
 - student experience
 
-## Supported versions for 1.0.0
+## Supported versions for 1.0.1
 
-Learning Celebration 1.0.0 declares Moodle 4.5 through Moodle 5.3 as its supported range. Moodle 5.3 compatibility was exercised through the public automated-test matrix before the stable release.
+Learning Celebration 1.0.1 declares Moodle 4.5 through Moodle 5.3 as its supported range. Run the 1.0.1 automated-test matrix before publication.
 
 ## Privacy statement for the listing
 
@@ -52,7 +52,7 @@ Learning Celebration reads an administrator-selected Date/Time profile field and
 
 ## Early bird 5.3 release note
 
-Version 1.0.0 explicitly declares Moodle 5.3 support after automated compatibility testing. Publish the 5.3-compatible Marketplace version before the Early bird 5.3 deadline. Do not claim the badge until Moodle grants it.
+Version 1.0.1 retains Moodle 5.3 support. Do not claim a badge until Moodle grants it.
 
 ## Automated testing statement for the listing
 

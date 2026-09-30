@@ -49,61 +49,42 @@ $string['analytics_richness_low'] = 'LOW — welcome-level data';
 $string['analytics_richness_none'] = 'NONE — no meaningful learning data for this period';
 $string['analytics_richness_rich'] = 'RICH — multiple meaningful learning signals';
 $string['analytics_richness_standard'] = 'STANDARD — enough data for an annual recap';
-$string['analyticsactivitynote'] = 'Activity completions use Moodle\'s current course_modules_completion record and ' .
-    'its timemodified value. If a completion state is changed later, its historical period attribution can also change. ' .
-    'Learning Celebration does not infer activity history from logs.';
-$string['analyticsgradenote'] = 'Course-grade statistics include only visible numeric course grades for courses ' .
-    'completed in the period. The completion date determines the period; the displayed percentage uses the current ' .
-    'final grade and does not reconstruct a historical grade snapshot.';
+$string['analyticsactivitynote'] = 'Activity completions use Moodle\'s current course_modules_completion record and its timemodified value. If a completion state is changed later, its historical period attribution can also change. Learning Celebration does not infer activity history from logs.';
+$string['analyticsgradenote'] = 'Course-grade statistics omit courses when grades are disabled, permission is missing, or any contributing assessment remains hidden. The completion date determines the period; the displayed percentage uses the current final grade and does not reconstruct a historical grade snapshot.';
 $string['analyticsheading'] = 'Learning analytics engine';
-$string['analyticsintro'] = 'This read-only diagnostic summarises Moodle core learning data for the two completed ' .
-    'birthday-to-birthday periods calculated above. No analytics snapshot is stored by Learning Celebration.';
+$string['analyticsintro'] = 'This read-only diagnostic summarises Moodle core learning data for the two completed birthday-to-birthday periods calculated above. No analytics snapshot is stored by Learning Celebration.';
 $string['analyticssettings'] = 'Learning recap content';
-$string['analyticssettings_desc'] = 'Choose which Moodle learning signals may appear in the annual recap. Disabled metrics are ' .
-    'removed before data-richness classification, so the experience automatically adapts rather than showing empty ' .
-    'placeholders.';
+$string['analyticssettings_desc'] = 'Choose which Moodle learning signals may appear in the annual recap. Disabled metrics are removed before data-richness classification, so the experience automatically adapts rather than showing empty placeholders.';
 $string['autodisplay_completed'] = 'Celebration completed';
 $string['autodisplay_firstviewed'] = 'First recorded display';
 $string['autodisplay_preference'] = 'Automatic celebration preference';
 $string['autodisplay_recordexists'] = 'Annual view record exists';
 $string['autodisplay_reset'] = 'Reset my annual view record for QA';
-$string['autodisplay_reset_help'] = 'Deletes only the current administrator’s view record for this celebration year and clears ' .
-    'the current-session snooze/completed flags. This is intended for testing the automatic overlay again.';
+$string['autodisplay_reset_help'] = 'Deletes only the current administrator’s view record for this celebration year and clears the current-session snooze/completed flags. This is intended for testing the automatic overlay again.';
 $string['autodisplay_resetdone'] = 'The annual view record was reset for this administrator.';
 $string['autodisplay_timecompleted'] = 'Completion time';
 $string['autodisplay_viewcount'] = 'Automatic display count';
 $string['autodisplay_year'] = 'Celebration year';
 $string['autodisplayheading'] = 'Automatic display state';
-$string['autodisplayintro'] = 'Diagnostic state for the current administrator and the most recent observed birthday year. ' .
-    'A view record is created only when the real automatic overlay is rendered. Manual replay is read-only and does ' .
-    'not increment the display counter.';
+$string['autodisplayintro'] = 'Diagnostic state for the current administrator and the most recent observed birthday year. A view record is created only when the real automatic overlay is rendered. Manual replay is read-only and does not increment the display counter.';
 $string['birthdayengine'] = 'Birthday engine';
-$string['birthdayengine_intro'] = 'The values below are calculated for the currently signed-in administrator using that user\'s ' .
-    'Moodle timezone. The displayed periods are the most recently completed birthday-to-birthday learning year and the period ' .
-    'immediately before it.';
+$string['birthdayengine_intro'] = 'The values below are calculated for the currently signed-in administrator using that user\'s Moodle timezone. The displayed periods are the most recently completed birthday-to-birthday learning year and the period immediately before it.';
 $string['birthdayfield'] = 'Birthday profile field';
-$string['birthdayfield_desc'] = 'Select the Moodle custom profile field that stores each user\'s date of birth. ' .
-    'Only Date/Time custom profile fields are listed. Learning Celebration does not copy this value into plugin-owned storage.';
+$string['birthdayfield_desc'] = 'Select the Moodle custom profile field that stores each user\'s date of birth. Only Date/Time custom profile fields are listed. Learning Celebration does not copy this value into plugin-owned storage.';
 $string['celebrationwindow'] = 'Celebration window';
-$string['celebrationwindow_desc'] = 'Choose how many calendar days after the birthday the celebration remains eligible. ' .
-    'The birthday itself is always day 0. This also works when the window crosses into a new calendar year.';
+$string['celebrationwindow_desc'] = 'Choose how many calendar days after the birthday the celebration remains eligible. The birthday itself is always day 0. This also works when the window crosses into a new calendar year.';
 $string['choosebirthdayfield'] = 'Choose a date profile field...';
 $string['configurationcheck'] = 'Configuration check';
 $string['contentpolicyheading'] = 'Content and presentation policy';
-$string['contentpolicyintro'] = 'These site-level choices are applied before Learning Celebration chooses an experience. ' .
-    'Turning off a learning signal removes it from the learner-facing recap and from the richness decision used to ' .
-    'select that recap.';
+$string['contentpolicyintro'] = 'These site-level choices are applied before Learning Celebration chooses an experience. Turning off a learning signal removes it from the learner-facing recap and from the richness decision used to select that recap.';
 $string['currentuservalue'] = 'Your own birthday value';
 $string['daterange'] = '{$a->start} → {$a->end}';
 $string['enableconfetti'] = 'Enable birthday confetti';
-$string['enableconfetti_desc'] = 'Show the decorative confetti animation on the birthday hero slide. Confetti is automatically ' .
-    'suppressed when motion is disabled or the user prefers reduced motion.';
+$string['enableconfetti_desc'] = 'Show the decorative confetti animation on the birthday hero slide. Confetti is automatically suppressed when motion is disabled or the user prefers reduced motion.';
 $string['enabled'] = 'Enable Learning Celebration';
-$string['enabled_desc'] = 'Enables Learning Celebration, including birthday diagnostics, previews and automatic ' .
-    'learner-facing celebrations on eligible Moodle pages.';
+$string['enabled_desc'] = 'Enables Learning Celebration, including birthday diagnostics, previews and automatic learner-facing celebrations on eligible Moodle pages.';
 $string['enablemotion'] = 'Enable motion effects';
-$string['enablemotion_desc'] = 'Enable plugin-authored slide and overlay transitions. Users who request reduced motion at ' .
-    'operating-system or browser level still receive a reduced-motion experience.';
+$string['enablemotion_desc'] = 'Enable plugin-authored slide and overlay transitions. Users who request reduced motion at operating-system or browser level still receive a reduced-motion experience.';
 $string['engine_birthdaytoday'] = 'Birthday today';
 $string['engine_currentperiod'] = 'Most recent completed learning period';
 $string['engine_daysafter'] = 'Days after most recent birthday';
@@ -126,8 +107,7 @@ $string['generalsettings_desc'] = 'Configure the birthday source and the calenda
 $string['leapday_feb28'] = 'Celebrate on 28 February in non-leap years';
 $string['leapday_mar1'] = 'Celebrate on 1 March in non-leap years';
 $string['leapdaypolicy'] = '29 February policy';
-$string['leapdaypolicy_desc'] = 'For users born on 29 February, choose the observed birthday in non-leap years. ' .
-    'In leap years, 29 February is always used.';
+$string['leapdaypolicy_desc'] = 'For users born on 29 February, choose the observed birthday in non-leap years. In leap years, 29 February is always used.';
 $string['learningcelebration:manage'] = 'Access Learning Celebration diagnostics and QA tools';
 $string['learningcelebration:view'] = 'View and use Learning Celebration';
 $string['manageprofilefields'] = 'Manage custom profile fields';
@@ -149,23 +129,15 @@ $string['policy_disabledmetric'] = 'Disabled by site setting';
 $string['policy_grades'] = 'Course grades and best-course highlight';
 $string['policy_motion'] = 'Motion effects';
 $string['pref_autoshow'] = 'Show my annual Learning Celebration automatically';
-$string['pref_autoshow_desc'] = 'When enabled, Learning Celebration may open on the first suitable Moodle page you visit ' .
-    'during your birthday window. It never opens on administrative pages, login pages, embedded/pop-up layouts, ' .
-    'or active quiz attempts.';
-$string['preferencesintro'] = 'Choose whether Moodle may automatically show your annual Learning Celebration when you are ' .
-    'inside the configured birthday window. Manual replay remains available when a completed celebration exists.';
+$string['pref_autoshow_desc'] = 'When enabled, Learning Celebration may open on the first suitable Moodle page you visit during your birthday window. It never opens on administrative pages, login pages, embedded/pop-up layouts, or active quiz attempts.';
+$string['preferencesintro'] = 'Choose whether Moodle may automatically show your annual Learning Celebration when you are inside the configured birthday window. Manual replay remains available when a completed celebration exists.';
 $string['preferencespage'] = 'Learning Celebration preferences';
 $string['presentationsettings'] = 'Presentation';
-$string['presentationsettings_desc'] = 'Control optional visual effects. Browser-level reduced-motion preferences are always ' .
-    'respected even when motion is enabled here.';
+$string['presentationsettings_desc'] = 'Control optional visual effects. Browser-level reduced-motion preferences are always respected even when motion is enabled here.';
 $string['previewapply'] = 'Load preview';
-$string['previewintro'] = 'Administrator-only visual QA. Preview the celebration with the current administrator\'s real data ' .
-    'or switch to deterministic demonstration datasets. Live preview applies the configured learning-content policy; ' .
-    'demonstration datasets remain available to inspect each visual layout. Site-level motion and confetti settings ' .
-    'apply to all previews. This page never marks a celebration as viewed.';
+$string['previewintro'] = 'Administrator-only visual QA. Preview the celebration with the current administrator\'s real data or switch to deterministic demonstration datasets. Live preview applies the configured learning-content policy; demonstration datasets remain available to inspect each visual layout. Site-level motion and confetti settings apply to all previews. This page never marks a celebration as viewed.';
 $string['previewliveresult'] = 'The analytics engine selected this experience for the current administrator: {$a}';
-$string['previewliveunavailable'] = 'A live preview cannot be built for this administrator yet. Configure a valid birthday ' .
-    'field and store a birthday value for this user, or select one of the demonstration datasets above.';
+$string['previewliveunavailable'] = 'A live preview cannot be built for this administrator yet. Configure a valid birthday field and store a birthday value for this user, or select one of the demonstration datasets above.';
 $string['previewmode'] = 'Preview dataset';
 $string['previewmode_live'] = 'Current administrator — real Moodle data';
 $string['previewopenstatus'] = 'Open diagnostics';
@@ -181,8 +153,7 @@ $string['privacy:metadata:views:userid'] = 'The user who received the celebratio
 $string['privacy:metadata:views:viewcount'] = 'The number of times the automatic annual celebration overlay was rendered.';
 $string['privacy:path:views'] = 'Learning Celebration views';
 $string['profilefieldchoice'] = '{$a->category} — {$a->name} ({$a->shortname})';
-$string['replayintro'] = 'A replay is generated from the same birthday-to-birthday period using the learning records ' .
-    'currently available in Moodle. Learning Celebration does not store a separate analytics snapshot.';
+$string['replayintro'] = 'A replay is generated from the same birthday-to-birthday period using the learning records currently available in Moodle. Learning Celebration does not store a separate analytics snapshot.';
 $string['replaylink'] = 'Replay my Learning Celebration';
 $string['replaynone'] = 'There is no completed Learning Celebration available to replay yet.';
 $string['replaypage'] = 'My Learning Celebration';
@@ -191,36 +162,26 @@ $string['resetsimulation'] = 'Reset to current values';
 $string['runsimulation'] = 'Run simulation';
 $string['settings'] = 'Learning Celebration';
 $string['showactiveenrolments'] = 'Include active enrolments in Birthday Welcome';
-$string['showactiveenrolments_desc'] = 'Allow the number of currently active course enrolments to appear as contextual ' .
-    'information for learners with little annual history.';
+$string['showactiveenrolments_desc'] = 'Allow the number of currently active course enrolments to appear as contextual information for learners with little annual history.';
 $string['showbadges'] = 'Include earned badges';
 $string['showbadges_desc'] = 'Allow Moodle badge awards to contribute to the recap and to data-richness classification.';
 $string['showcomparison'] = 'Allow year-over-year comparison';
-$string['showcomparison_desc'] = 'When both completed learning periods contain enough enabled data, allow a neutral side-by-side ' .
-    'comparison. Disabling this never removes the annual recap itself.';
+$string['showcomparison_desc'] = 'When both completed learning periods contain enough enabled data, allow a neutral side-by-side comparison. Disabling this never removes the annual recap itself.';
 $string['showcompletedactivities'] = 'Include completed activities';
-$string['showcompletedactivities_desc'] = 'Allow activity-completion counts to contribute to the recap and to data-richness ' .
-    'classification.';
+$string['showcompletedactivities_desc'] = 'Allow activity-completion counts to contribute to the recap and to data-richness classification.';
 $string['showcompletedcourses'] = 'Include completed courses';
-$string['showcompletedcourses_desc'] = 'Allow course-completion counts to contribute to the recap and to data-richness ' .
-    'classification.';
+$string['showcompletedcourses_desc'] = 'Allow course-completion counts to contribute to the recap and to data-richness classification.';
 $string['showgrades'] = 'Include course grades';
-$string['showgrades_desc'] = 'Allow visible numeric final course grades to appear as an average and best-course highlight. ' .
-    'Disable this if the institution does not want grades shown in celebrations.';
+$string['showgrades_desc'] = 'Allow visible numeric final course grades to appear as an average and best-course highlight. Disable this if the institution does not want grades shown in celebrations.';
 $string['simulatedbirthday'] = 'Simulated birthday';
 $string['simulatedtoday'] = 'Simulated current date';
-$string['simulationinvalid'] = 'The simulation could not run. Check that both dates are valid calendar dates, that ' .
-    'the birthday is not later than the simulated current date, and then try again.';
+$string['simulationinvalid'] = 'The simulation could not run. Check that both dates are valid calendar dates, that the birthday is not later than the simulated current date, and then try again.';
 $string['simulationleapdaypolicy'] = 'Simulation 29 February policy';
 $string['simulationresult'] = 'Simulation result';
 $string['simulationwindow'] = 'Simulation celebration window';
 $string['simulatorheading'] = 'Birthday engine simulator';
-$string['simulatorintro'] = 'Administrator-only QA tool. Enter a birthday and a simulated current date to test the ' .
-    'engine without changing the user profile, server clock or Moodle configuration. Simulation values are used only ' .
-    'for this request and are not stored.';
-$string['statusintro'] = 'This diagnostic page validates the plugin configuration, site-level content policy and ' .
-    'birthday engine. It also includes a non-persistent administrator simulator and read-only learning analytics ' .
-    'It does not trigger the visual birthday experience or store analytics snapshots.';
+$string['simulatorintro'] = 'Administrator-only QA tool. Enter a birthday and a simulated current date to test the engine without changing the user profile, server clock or Moodle configuration. Simulation values are used only for this request and are not stored.';
+$string['statusintro'] = 'This diagnostic page validates the plugin configuration, site-level content policy and birthday engine. It also includes a non-persistent administrator simulator and read-only learning analytics It does not trigger the visual birthday experience or store analytics snapshots.';
 $string['statusitem'] = 'Check';
 $string['statuspage'] = 'Configuration status';
 $string['statusvalue'] = 'Value';
@@ -228,8 +189,7 @@ $string['userswithbirthday'] = 'Users with a stored value';
 $string['valueavailable'] = 'A value is available';
 $string['valuemissing'] = 'No value is stored';
 $string['visual_brand'] = '{$a} · Learning Celebration';
-$string['visual_comparison_body'] = 'These values compare the two completed birthday-to-birthday periods without ranking ' .
-    'or judging your performance.';
+$string['visual_comparison_body'] = 'These values compare the two completed birthday-to-birthday periods without ranking or judging your performance.';
 $string['visual_comparison_eyebrow'] = 'Two learning years';
 $string['visual_comparison_title'] = 'Your recent history, side by side';
 $string['visual_demo_course'] = 'Artificial Intelligence for Educators';
@@ -237,15 +197,12 @@ $string['visual_demo_period'] = 'A demonstration of the birthday-to-birthday per
 $string['visual_final_body'] = 'Keep learning at your own pace, one meaningful step at a time.';
 $string['visual_final_eyebrow'] = 'A new year begins';
 $string['visual_final_title'] = 'That was your year. Now comes the next one.';
-$string['visual_firststeps_body'] = 'You are still building your history here. We will celebrate the meaningful milestones ' .
-    'that are already available without filling the experience with empty statistics.';
+$string['visual_firststeps_body'] = 'You are still building your history here. We will celebrate the meaningful milestones that are already available without filling the experience with empty statistics.';
 $string['visual_firststeps_eyebrow'] = 'Your first steps';
 $string['visual_firststeps_title'] = 'Your journey has already begun';
-$string['visual_hero_body_learning'] = 'Today we are celebrating you — and taking a look at the learning journey that ' .
-    'filled your last year.';
+$string['visual_hero_body_learning'] = 'Today we are celebrating you — and taking a look at the learning journey that filled your last year.';
 $string['visual_hero_body_simple'] = 'Today is about celebrating another year of you. A new learning year begins from here.';
-$string['visual_hero_body_welcome'] = 'Your learning journey here is just getting started, and today is already a good ' .
-    'reason to celebrate.';
+$string['visual_hero_body_welcome'] = 'Your learning journey here is just getting started, and today is already a good reason to celebrate.';
 $string['visual_hero_eyebrow'] = 'A day worth celebrating';
 $string['visual_hero_title'] = 'Happy birthday, {$a}!';
 $string['visual_highlight_eyebrow'] = 'A standout result';
@@ -262,8 +219,7 @@ $string['visual_next'] = 'Next';
 $string['visual_previous'] = 'Previous';
 $string['visual_previousyear'] = 'Previous year';
 $string['visual_progress'] = 'Celebration progress';
-$string['visual_quiet_body'] = 'There is not enough activity yet for an annual recap, so we are keeping the focus on ' .
-    'your birthday and what comes next.';
+$string['visual_quiet_body'] = 'There is not enough activity yet for an annual recap, so we are keeping the focus on your birthday and what comes next.';
 $string['visual_quiet_eyebrow'] = 'Your next chapter';
 $string['visual_quiet_title'] = 'A new learning year starts today';
 $string['visual_restart'] = 'Replay';
@@ -272,8 +228,7 @@ $string['visual_thisyear'] = 'Recent year';
 $string['visual_yearinnumbers_eyebrow'] = 'Your year in numbers';
 $string['visual_yearinnumbers_title'] = 'A few things you accomplished';
 $string['warningdisabled'] = 'Learning Celebration is currently disabled.';
-$string['warninginvalidfield'] = 'The configured birthday field no longer exists or is not a Date/Time profile field. ' .
-    'Select another field in the plugin settings.';
+$string['warninginvalidfield'] = 'The configured birthday field no longer exists or is not a Date/Time profile field. Select another field in the plugin settings.';
 $string['warningnofieldconfigured'] = 'No birthday profile field has been selected yet.';
 $string['window_birthdayonly'] = 'Birthday only';
 $string['window_custom'] = 'Birthday + {$a} days';

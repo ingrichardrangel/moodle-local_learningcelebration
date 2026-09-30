@@ -4,9 +4,9 @@
 
 Learning Celebration is a free local Moodle plugin that celebrates a learner's birthday with a privacy-conscious annual learning recap built from Moodle core learning records.
 
-## Version 1.0.0 Stable
+## Version 1.0.1 Stable
 
-Version 1.0.0 is the first **stable public release** of Learning Celebration. It promotes the feature-complete and fully tested 0.9.0 codebase to stable status without introducing new learner-facing behaviour or database-schema changes.
+Version 1.0.1 addresses feedback from the Moodle Marketplace review. The annual recap now omits course grades when the learner cannot view grades or when hidden assessments could affect the total. This release also updates source headers and language strings. Version 1.0.0 was the first stable public release.
 
 ### Compatibility
 
@@ -134,7 +134,7 @@ See [SECURITY.md](SECURITY.md) for the complete security model.
 
 The repository contains PHPUnit and Behat tests and a Moodle Plugin CI workflow. The pipeline runs PHP lint, Moodle Code Checker, PHPDoc checks, plugin validation, upgrade-savepoint validation, Mustache linting, Grunt/AMD validation, PHPUnit and Behat.
 
-The stable 1.0.0 release retains the green CI baseline across Moodle 4.5, Moodle 5.2 and the Moodle 5.3 code line, with MariaDB and PostgreSQL coverage.
+Version 1.0.0 established a green CI baseline across Moodle 4.5, Moodle 5.2 and the Moodle 5.3 code line, with MariaDB and PostgreSQL coverage. Run the CI matrix again for version 1.0.1 before publishing it.
 
 See [docs/TESTING.md](docs/TESTING.md) and [docs/RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md).
 
