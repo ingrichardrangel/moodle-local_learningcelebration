@@ -196,8 +196,10 @@ class analytics_repository {
             // A course total can include assessments hidden from the learner even when the
             // course-total grade item and the learner's course-total row are themselves visible.
             $context = \context_course::instance((int) $record->courseid);
-            if (!has_capability('moodle/grade:view', $context, $userid) ||
-                    $this->course_has_hidden_grades((int) $record->courseid, $userid)) {
+            if (
+                !has_capability('moodle/grade:view', $context, $userid) ||
+                $this->course_has_hidden_grades((int) $record->courseid, $userid)
+            ) {
                 continue;
             }
 
